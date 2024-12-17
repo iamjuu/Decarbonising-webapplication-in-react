@@ -12,13 +12,12 @@ const Header = () => {
 
   return (
     <HeaderContainer>
-      <Logo>Carserving</Logo>
+      <Logo>Logo</Logo>
       <Navigation className={menuOpen ? 'open' : ''}>
         <NavLink>HOME</NavLink>
         <NavLink>ABOUT</NavLink>
         <NavLink>SERVICE</NavLink>
-        <NavLink>PRICE</NavLink>
-        <NavLink>CLIENT</NavLink>
+        <NavLink>CONTECT</NavLink>
       </Navigation>
       <ContactButton>Book Now</ContactButton>
       <MenuToggle onClick={toggleMenu}>
@@ -89,6 +88,7 @@ const NavLink = styled.a`
 const ContactButton = styled.button`
   background-color: #ff0000;
   color: #fff;
+  border-radius:2px;
   border: none;
   padding: 0.5rem 1rem;
   font-size: 0.9rem;
