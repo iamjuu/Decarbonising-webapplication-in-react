@@ -64,7 +64,7 @@ const Container = styled.div`
 `;
 
 const TextSection = styled.div`
-  line-height: 20px;
+  line-height: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,12 +73,13 @@ const TextSection = styled.div`
   padding: 2rem;
 
   h5 {
-    font-size: 1.2rem;
+    font-size: 1rem;
+    color:red;
     margin-bottom: 1rem;
   }
 
   h2 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     margin-bottom: 1rem;
   }
 
@@ -116,7 +117,7 @@ const ServiceTitle = styled.h3`
 `;
 
 const ServiceDescription = styled.p`
-  font-size: 1.1rem;
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.4rem;
   color: #666;
 `;
