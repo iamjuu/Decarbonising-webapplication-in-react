@@ -1,16 +1,20 @@
-import Navbar from './components/navbar'
-import Sections from './components/sections'
-import './App.css'
+import React, { lazy, Suspense } from 'react';
+import Navbar from './components/navbar';
+import Footer from './components/footer'
+import './App.css';
+const Sections = lazy(() => import('./components/sections')); 
+import Loader from './common/loader';
 
 function App() {
-
   return (
     <>
       <Navbar />
-      <Sections/>
-      
+      <Suspense fallback={<Loader />}>
+        <Sections />
+      </Suspense>
+      <Footer/>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

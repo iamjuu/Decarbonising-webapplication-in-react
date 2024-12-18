@@ -1,16 +1,17 @@
-import React from 'react'
-import SectionOne from './sectionOne'
+import React, { lazy, Suspense } from 'react';
+  import SectionOne from './sectionOne'
 import SectionTwo from './sectionTwo'
 import SectionThree from './sectionThree'
-import SectionFour from './sectionFour'
+const SectionFour = lazy(() => import('./sectionFour'));
 const index = () => {
   return (
     <>
-      <SectionOne/>
+ <SectionOne/>
 <SectionTwo/>
 <SectionThree/>
-<SectionFour/>
-    </>
+<Suspense fallback={<div>Loading Section Four...</div>}>
+        <SectionFour />
+      </Suspense>    </>
   )
 }
 

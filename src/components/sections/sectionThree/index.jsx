@@ -1,7 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Service1, Service2, Service3, Service4 } from '../../../assets';
-
+import { Service1, Service2, Service3 } from '../../../assets';
+import {Container,ServiceDescription,ServiceImage,ServiceItem,ServiceTitle,ServicesContainer,TextSection} from './style'
 const services = [
   {
     id: 1,
@@ -24,13 +23,7 @@ const services = [
     description:
       'We utilize cutting-edge diagnostics and techniques to ensure optimal condition.',
   },
-  {
-    id: 4,
-    image: Service4,
-    title: 'Engine Diagnostics',
-    description:
-      'Unlock the secrets of your car\'s performance with state-of-the-art diagnostic services.',
-  },
+
 ];
 
 const WhyChooseUs = () => {
@@ -56,68 +49,3 @@ const WhyChooseUs = () => {
 };
 
 export default WhyChooseUs;
-
-const Container = styled.div`
-  font-family: 'Roboto', sans-serif;
-  padding: 4rem;
-  background-color: #f5f5f5;
-`;
-
-const TextSection = styled.div`
-  line-height: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  padding: 2rem;
-
-  h5 {
-    font-size: 1rem;
-    color:red;
-    margin-bottom: 1rem;
-  }
-
-  h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-
-  p {
-    font-size: 1rem;
-    line-height: 1.6;
-  }
-`;
-
-const ServicesContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: 2rem;
-`;
-
-const ServiceItem = styled.div`
-  padding: 2rem;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-`;
-
-const ServiceImage = styled.img`
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: contain;
-  margin-bottom: 1.5rem;
-`;
-
-const ServiceTitle = styled.h3`
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-`;
-
-const ServiceDescription = styled.p`
-  font-size: 1rem;
-  line-height: 1.4rem;
-  color: #666;
-`;
