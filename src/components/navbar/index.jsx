@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { RiMenuFold2Fill } from "react-icons/ri";
 import { IoMdClose } from "react-icons/io";
-import {ContactButton,HeaderContainer,Logo,MenuToggle,NavLink,Navigation} from './style'
-import {Logoo} from '../../assets'
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { ContactButton, HeaderContainer, Logo, MenuToggle, NavLink, Navigation } from './style';
+import { Logoo } from '../../assets';
+import Btn  from '../Button'
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -13,7 +15,7 @@ const Header = () => {
   return (
     <HeaderContainer>
       <Logo>
-        <img style={{width:'70px'}} src={Logoo} alt="" />
+        <img style={{ width: '70px' }} src={Logoo} alt="" />
       </Logo>
       <Navigation className={menuOpen ? 'open' : ''}>
         <NavLink>HOME</NavLink>
@@ -21,9 +23,10 @@ const Header = () => {
         <NavLink>SERVICE</NavLink>
         <NavLink>CONTECT</NavLink>
       </Navigation>
-      <ContactButton>Book Now</ContactButton>
+<Btn value="Register" to="/register" />
+
       <MenuToggle onClick={toggleMenu}>
-        {menuOpen ? <IoMdClose/> : <RiMenuFold2Fill />        }
+        {menuOpen ?' ✔️ ': '❌'}
       </MenuToggle>
     </HeaderContainer>
   );
