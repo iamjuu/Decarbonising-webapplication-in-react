@@ -4,6 +4,8 @@ import 'aos/dist/aos.css';
 import SectionOne from './sectionOne';
 import SectionTwo from './sectionTwo';
 import SectionThree from './sectionThree';
+import Navbar from '../navbar'
+import Footer from '../footer'
 
 const SectionFour = lazy(() => import('./sectionFour'));
 
@@ -14,6 +16,7 @@ const Index = () => {
 
   return (
     <>
+    <Navbar/>
       <div data-aos="fade-up">
         <SectionOne />
       </div>
@@ -28,6 +31,7 @@ const Index = () => {
           <SectionFour />
         </div>
       </Suspense>
+      <Footer/>
     </>
   );
 };
