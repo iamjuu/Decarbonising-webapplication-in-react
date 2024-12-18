@@ -4,8 +4,8 @@ import 'aos/dist/aos.css';
 import SectionOne from './sectionOne';
 import SectionTwo from './sectionTwo';
 import SectionThree from './sectionThree';
-import Navbar from '../navbar'
-import Footer from '../footer'
+import Navbar from '../../components/navbar'
+import Footer from '../../components/footer'
 
 const SectionFour = lazy(() => import('./sectionFour'));
 

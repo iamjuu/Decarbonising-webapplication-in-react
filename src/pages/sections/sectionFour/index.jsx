@@ -1,5 +1,5 @@
 import React from 'react'
-import {AnimatedTestimonialsDemo} from '../../animations/cards'
+import {AnimatedTestimonialsDemo} from '../../../components/animations/cards'
 import styled from 'styled-components'
 const index = () => {
   return (
