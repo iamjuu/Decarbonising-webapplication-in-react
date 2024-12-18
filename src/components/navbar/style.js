@@ -6,7 +6,7 @@ export const HeaderContainer = styled.header`
   align-items: center;
   justify-content: space-between;
   padding: 1rem 2rem;
-  background-color: #333;
+  /* background-color: #333; */
   color: #fff;
   font-family: 'Roboto', sans-serif;
 
@@ -46,7 +46,7 @@ export const Navigation = styled.nav`
 
 export const NavLink = styled.a`
   text-decoration: none;
-  color: #fff;
+  color: black;
   font-size: 0.9rem;
   transition: color 0.3s;
 

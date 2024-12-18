@@ -5,7 +5,7 @@ export  const Container = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 4rem;
-  background-color: #f5f5f5;
+  /* background-color: #f5f5f5; */
   font-family: 'Roboto', sans-serif; /* Apply font family globally here */
 
   @media (max-width: 768px) {

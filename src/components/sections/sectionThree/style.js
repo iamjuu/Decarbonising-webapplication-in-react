@@ -5,7 +5,7 @@ display:flex;
 flex-direction:column;
   font-family: 'Roboto', sans-serif;
   padding: 4rem;
- background-color: #f5f5f5; 
+ /* background-color: #F5F5F5;  */
 
 `;
 

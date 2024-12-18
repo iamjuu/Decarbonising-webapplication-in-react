@@ -6,7 +6,7 @@ export function AnimatedTestimonialsDemo() {
       quote:
         "The attention to detail and innovative features have completely transformed our workflow. This is exactly what we've been looking for.",
       name: "Muhammed ajmal",
-      designation: "Soft ware developer",
+      designation: "Software developer",
       src:Pic3
     },
     {
