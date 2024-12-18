@@ -1,9 +1,9 @@
 import React from 'react'
-
+import {AnimatedTestimonialsDemo} from '../../animations/cards'
 const index = () => {
   return (
     <div>
-      <h1>heloo</h1>
+<AnimatedTestimonialsDemo/>
     </div>
   )
 }
