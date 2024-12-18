@@ -44,6 +44,10 @@ gap:20px;
 
 export  const ServiceItem = styled.div`
 width:300px;
+display: flex;
+flex-direction: column;
+justify-content:center;
+align-items: center;
   text-align: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
