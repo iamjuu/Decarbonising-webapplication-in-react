@@ -99,7 +99,7 @@ const Pickup = () => {
                     <p className="font-medium text-lg">Personal Details</p>
 
                     {previewImage && (
-                   <div className="mt-5 relative w-full h-40 flex items-center justify-center">
+                   <div className="mt-2 relative w-full h-40 flex items-center justify-center">
                    <img
                      src={previewImage}
                      alt="Preview"
