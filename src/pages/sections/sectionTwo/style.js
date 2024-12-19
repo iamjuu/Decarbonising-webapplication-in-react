@@ -28,25 +28,24 @@ export  const HeaderText = styled.h3`
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  font-family: 'Roboto', sans-serif; /* Apply font family */
+  font-family: 'Roboto', sans-serif; 
 `;
 
 export  const Title = styled.h2`
-  font-size: 2.5rem;
-  font-weight: 700;
+  font-size: 2rem;
   line-height: 1.2;
   margin-bottom: 2rem;
-  font-family: 'Roboto', sans-serif; /* Apply font family */
+  font-family:  sans-serif; 
 
   @media (max-width: 768px) {
-    font-size: 2rem;
+    font-size: 1rem;
   }
 `;
 
 export  const Description = styled.p`
 color:#6B7280;
   font-size: 1.1rem;
-  line-height: 1.6;
+  line-height: 1.2;
   margin-bottom: 2rem;
   font-family: 'Roboto', sans-serif; /* Apply font family */
 `;

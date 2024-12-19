@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { RiMenuFold2Fill } from "react-icons/ri";
+import { CgMenuRightAlt } from "react-icons/cg";
 import { IoMdClose } from "react-icons/io";
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
-import { ContactButton, HeaderContainer, Logo, MenuToggle, NavLink, Navigation } from './style';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons"; // Import specific icon
+import { HeaderContainer, Logo, MenuToggle, NavLink, Navigation } from './style';
 import { Logoo } from '../../assets';
-import Btn  from '../Button'
+import Btn from '../Button';
+
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -15,18 +17,17 @@ const Header = () => {
   return (
     <HeaderContainer>
       <Logo>
-        <img style={{ width: '70px' }} src={Logoo} alt="" />
+        <img style={{ width: '70px' }} src={Logoo} alt="Logo" />
       </Logo>
       <Navigation className={menuOpen ? 'open' : ''}>
         <NavLink>HOME</NavLink>
         <NavLink>ABOUT</NavLink>
         <NavLink>SERVICE</NavLink>
-        <NavLink>CONTECT</NavLink>
+        <NavLink>CONTACT</NavLink>
       </Navigation>
-<Btn value="Register" to="/register" />
-
+      <Btn value="Register" to="/register" />
       <MenuToggle onClick={toggleMenu}>
-        {menuOpen ?' ✔️ ': '❌'}
+        {menuOpen ? <IoMdClose /> : <FontAwesomeIcon icon={faBars} />}
       </MenuToggle>
     </HeaderContainer>
   );

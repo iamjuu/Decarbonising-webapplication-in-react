@@ -80,8 +80,8 @@ export const ContactButton = styled.button`
 `;
 
 export const MenuToggle = styled.button`
-  background-color: transparent;
-  color: #fff;
+  /* background-color: transparent; */
+  color: black;
   border: none;
   font-size: 1.2rem;
   cursor: pointer;
