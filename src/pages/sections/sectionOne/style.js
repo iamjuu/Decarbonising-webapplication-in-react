@@ -26,6 +26,7 @@ export const Container = styled.div`
 
 export const ContentWrapper = styled.div`
   width: 100%;
+  /* background-color: red; */
   max-width: 1300px;
   color: white;
   padding: 100px; 
@@ -33,23 +34,23 @@ export const ContentWrapper = styled.div`
 
   h1 {
     font-family: sans-serif;
-    font-size: 4rem; 
+    font-size: 3rem; 
 
     @media (max-width: 768px) {
-      font-size: 2.5rem; 
+      font-size: 2rem; 
     }
 
     @media (max-width: 480px) {
-      font-size: 1.8rem; 
+      font-size: 1rem; 
     }
   }
 
   @media (max-width: 768px) {
-    padding: 50px; 
+    padding: 10px; 
   }
 
   @media (max-width: 480px) {
     padding: 20px;
-    text-align: center; 
+    text-align: left; 
   }
 `;

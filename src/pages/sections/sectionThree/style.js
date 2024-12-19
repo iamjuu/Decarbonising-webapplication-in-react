@@ -65,7 +65,6 @@ export  const ServiceImage = styled.img`
 
 export  const ServiceTitle = styled.h3`
   font-size: 1.2rem;
-  font-weight: 600;
   margin-bottom: 1rem;
 `;
 
