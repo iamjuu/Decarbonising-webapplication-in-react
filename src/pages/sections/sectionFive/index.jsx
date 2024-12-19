@@ -25,7 +25,7 @@ const Index = () => {
           <InputContainer >
             <InputField
               type="text"
-              placeholder="Search by vehicle number"
+              placeholder="Search by vehicle No:"
               value={vehicleNumber}
               onChange={handleInputChange}
             />
