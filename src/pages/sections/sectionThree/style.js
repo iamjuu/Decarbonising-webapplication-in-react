@@ -42,17 +42,24 @@ gap:20px;
 
 `;
 
-export  const ServiceItem = styled.div`
-width:300px;
-display: flex;
-flex-direction: column;
-justify-content:center;
-align-items: center;
+export const ServiceItem = styled.div`
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   padding: 40px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  }
 `;
+
 
 export  const ServiceImage = styled.img`
   width: 150px;
