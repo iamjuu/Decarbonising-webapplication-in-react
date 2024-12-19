@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Button,Container,InputField,InputWrapper,Label,SvgIcon,Text,Wrapper} from './style'
+import {Button,Container,InputField,InputWrapper,Label,SvgIcon,Text,Wrapper,InputContainer} from './style'
 
 const Index = () => {
   const [vehicleNumber, setVehicleNumber] = useState('');
@@ -22,7 +22,7 @@ const Index = () => {
       <Wrapper>
         <Label>Search by vehicle number</Label>
         <InputWrapper>
-          <div style={{ display: 'flex', gap: '10px', width: '50%' }}>
+          <InputContainer >
             <InputField
               type="text"
               placeholder="Search by vehicle number"
@@ -34,7 +34,7 @@ const Index = () => {
                 <path fillRule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" />
               </SvgIcon>
             </Button>
-          </div>
+          </InputContainer>
         </InputWrapper>
       </Wrapper>
     </Container>
