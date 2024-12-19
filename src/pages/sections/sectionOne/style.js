@@ -30,6 +30,9 @@ export const ContentWrapper = styled.div`
   width: 100%;
   max-width: 1300px;
   color: white;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
   padding: 20px;
   text-align: start;
 

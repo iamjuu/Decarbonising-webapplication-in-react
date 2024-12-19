@@ -36,7 +36,7 @@ const index = () => {
                 />
   
                 <button
-                  className="mt-1 w-full bg-teal-500 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-none hover:bg-teal-600 sm:mt-0 sm:w-auto sm:shrink-0"
+                  className="mt-1 w-full bg-[#ff0000] px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-none hover:bg-teal-600 sm:mt-0 sm:w-auto sm:shrink-0"
                 >
                   Sign Up
                 </button>
