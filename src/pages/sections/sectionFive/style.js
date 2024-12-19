@@ -17,6 +17,7 @@ export  const Text = styled.div`
     font-weight: 100;
 
     @media (max-width: 768px) {
+      width: 100%;
         font-size: 0.875rem;
     }
 `;
@@ -26,7 +27,8 @@ export  const Wrapper = styled.div`
   padding: 10px;
 
   @media (max-width: 768px) {
-    max-width: 20rem;
+
+ width: 100%;
   }
 
   @media (max-width: 480px) {
@@ -80,15 +82,13 @@ export  const InputField = styled.input`
 
 export  const Button = styled.button`
   padding:10px;
-  border-radius: 0.375rem;
+  border-radius: 10px;
   background-color: #1e293b;
   border: 1px solid transparent;
   color: white;
-  font-size: 0.875rem;
   transition: all 0.3s ease;
   display: flex;
-  justify-content: center;
-  align-items: center;
+
 
   &:hover {
     background-color: #334155;
@@ -110,11 +110,7 @@ export  const Button = styled.button`
     opacity: 0.5;
   }
 
-  @media (max-width: 768px) {
-    top: 0.125rem;
-    right: 0.125rem;
-    padding: 0.25rem;
-  }
+
 `;
 
 export  const SvgIcon = styled.svg`
@@ -126,3 +122,12 @@ export  const SvgIcon = styled.svg`
     height: 0.875rem;
   }
 `;
+export const InputContainer = styled.div`
+display: flex;
+gap: 10px;
+justify-content: space-between;
+width: 70%;
+@media (max-width:425px) {
+  width: 100%;
+}
+`
