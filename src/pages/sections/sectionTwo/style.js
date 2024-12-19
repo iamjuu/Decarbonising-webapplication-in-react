@@ -44,8 +44,7 @@ export  const Title = styled.h2`
 
 export  const Description = styled.p`
 color:#6B7280;
-  font-size: 1.1rem;
-  line-height: 1.2;
+  font-size: 1rem;
   margin-bottom: 2rem;
   font-family: 'Roboto', sans-serif; /* Apply font family */
 `;
