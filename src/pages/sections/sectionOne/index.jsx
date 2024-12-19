@@ -24,6 +24,7 @@ const AnimatedText = ({ title, subtitle }) => {
         <br /> 
         {renderText(subtitle.split(" & ").join(" &\n"))}
       </h1>
+     
     </ContentWrapper>
   );
 };
@@ -34,6 +35,7 @@ const Index = () => {
       {data.map((item) => (
         <Container key={item.id} bg={item.bg}>
           <AnimatedText title={item.title} subtitle={item.subtitle} />
+
         </Container>
       ))}
     </>
