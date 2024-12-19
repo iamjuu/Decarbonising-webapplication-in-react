@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import {Button,Container,InputField,InputWrapper,Label,SvgIcon,Text,Wrapper,InputContainer} from './style'
+import {useNavigate} from 'react-router-dom'
 
 const Index = () => {
+  const Navigate = useNavigate()
   const [vehicleNumber, setVehicleNumber] = useState('');
 
   const handleInputChange = (event) => {
@@ -11,6 +13,7 @@ const Index = () => {
   const handleSearch = () => {
 
     console.log('Searching for vehicle number:', vehicleNumber);
+    Navigate('/vehicle-datails')
     
   };
 
@@ -25,7 +28,7 @@ const Index = () => {
           <InputContainer >
             <InputField
               type="text"
-              placeholder="Search by vehicle No:"
+              placeholder="Search by vehicle Number"
               value={vehicleNumber}
               onChange={handleInputChange}
             />
