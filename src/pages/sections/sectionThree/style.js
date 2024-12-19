@@ -50,13 +50,13 @@ justify-content:center;
 align-items: center;
   text-align: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 40px;
 `;
 
 export  const ServiceImage = styled.img`
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   box-shadow: 0 14px 16px rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   object-fit: contain;
