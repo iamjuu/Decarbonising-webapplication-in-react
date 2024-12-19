@@ -27,9 +27,7 @@ const initialValues = {
 // Submit handler
 const handleSubmit = async (values, { resetForm, setSubmitting }) => {
   try {
-    console.log(values,'sfsd');
-    
-    const formData = new FormData();    
+    const formData = new FormData();
     formData.append("full_name", values.full_name);
     formData.append("phone", values.phone);
     formData.append("place", values.place);
@@ -97,16 +95,6 @@ const Pickup = () => {
                 <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
                   <div className="text-gray-600">
                     <p className="font-medium text-lg">Personal Details</p>
-
-                    {previewImage && (
-                   <div className="mt-2 relative w-full h-40 flex items-center justify-center">
-                   <img
-                     src={previewImage}
-                     alt="Preview"
-                     className="w-32 h-auto object-contain rounded"
-                   />
-                 </div>
-                    )}
                   </div>
 
                   <div className="lg:col-span-2">
@@ -207,16 +195,28 @@ const Pickup = () => {
                           className="text-red-500"
                         />
                       </div>
-                      <button
-  type="submit"
-  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-  disabled={isSubmitting}
->
-  {isSubmitting ? "Submitting" : "Submit"}
-</button>
                     </div>
                   </div>
                 </div>
+
+                {/* Preview Image */}
+                <div className="mt-4  flex justify-center">
+                  {previewImage && (
+                    <img
+                      src={previewImage}
+                      alt="Preview"
+                      className="w-32 h-auto object-contain rounded"
+                    />
+                  )}
+                </div>
+
+                <button
+                  type="submit"
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 mt-4"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Submitting" : "Submit"}
+                </button>
               </div>
             </Form>
           )}
