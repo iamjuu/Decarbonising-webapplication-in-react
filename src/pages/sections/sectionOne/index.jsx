@@ -9,19 +9,31 @@ const data = [
     subtitle: "Qualified & Professional",
     bg: Header,
   },
-  // Add more objects here if needed
 ];
+
+const AnimatedText = ({ title, subtitle }) => {
+  const renderText = (text) =>
+    text.split(" ").map((word, index) => (
+      <span key={index}>{word} </span>
+    ));
+
+  return (
+    <ContentWrapper>
+      <h1>
+        {renderText(title)}
+        <br /> 
+        {renderText(subtitle.split(" & ").join(" &\n"))}
+      </h1>
+    </ContentWrapper>
+  );
+};
 
 const Index = () => {
   return (
     <>
       {data.map((item) => (
         <Container key={item.id} bg={item.bg}>
-          <ContentWrapper>
-            <h1>
-              {item.title} <br /> {item.subtitle.split(" & ").join(" &\n")}
-            </h1>
-          </ContentWrapper>
+          <AnimatedText title={item.title} subtitle={item.subtitle} />
         </Container>
       ))}
     </>
