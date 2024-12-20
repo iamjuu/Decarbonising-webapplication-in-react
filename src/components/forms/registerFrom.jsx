@@ -45,20 +45,29 @@ const Pickup = () => {
     setPreviewImage(URL.createObjectURL(file));
   };
 
-  // Handle vehicle number change (uppercase and numbers only)
-  const handleVehicleNumberChange = (event, setFieldValue) => {
-    const formattedValue = event.target.value.toUpperCase().replace(/[^A-Z0-9]/g, ''); // Allow only uppercase and numbers
-    setFieldValue("vehiclenumber", formattedValue);
-  };
-
   // Submit handler
   const handleSubmit = async (values, { resetForm, setSubmitting }) => {
+    // Manually convert vehicle number to uppercase before submitting
+    const formattedVehicleNumber = values.vehiclenumber.toUpperCase();
+
+    // Check the format with regex before submitting
+    if (!/^[A-Z0-9]+$/.test(formattedVehicleNumber)) {
+      Swal.fire({
+        title: "Error",
+        text: "Vehicle number must only contain uppercase letters and numbers",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+      setSubmitting(false);
+      return;
+    }
+
     try {
       const formData = new FormData();
       formData.append("full_name", values.full_name);
       formData.append("phone", values.phone);
       formData.append("place", values.place);
-      formData.append("vehiclenumber", values.vehiclenumber);
+      formData.append("vehiclenumber", formattedVehicleNumber);
       formData.append("pickupImage", values.pickupImage);
 
       const response = await Axios.post("/Nso2/user/register", formData, {
@@ -162,8 +171,6 @@ const Pickup = () => {
                           name="vehiclenumber"
                           id="vehiclenumber"
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          style={{ textTransform: "uppercase" }}
-                          onInput={(e) => handleVehicleNumberChange(e, setFieldValue)} // Handle input to format as uppercase and numbers only
                         />
                         <ErrorMessage
                           name="vehiclenumber"
