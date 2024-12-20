@@ -3,14 +3,16 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Axios from "../../Instance/Instance"; // Assuming Axios instance for backend communication
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 // Validation schema using Yup
 const validationSchema = Yup.object({
   full_name: Yup.string().required("Full Name is required"),
   phone: Yup.number().required("Phone number is required"),
   place: Yup.string().required("Place is required"),
-  vehiclenumber: Yup.string().required("Vehicle Number is required"),
-  time: Yup.string().required("Time is required"),
+  vehiclenumber: Yup.string()
+    .matches(/^[A-Z0-9]+$/, "Vehicle number must only contain uppercase letters and numbers")
+    .required("Vehicle Number is required"),
   pickupImage: Yup.mixed().required("Image is required"),
 });
 
@@ -20,50 +22,12 @@ const initialValues = {
   phone: "",
   place: "",
   vehiclenumber: "",
-  time: "",
   pickupImage: null,
-};
-
-// Submit handler
-const handleSubmit = async (values, { resetForm, setSubmitting }) => {
-  try {
-    const formData = new FormData();
-    formData.append("full_name", values.full_name);
-    formData.append("phone", values.phone);
-    formData.append("place", values.place);
-    formData.append("vehiclenumber", values.vehiclenumber);
-    formData.append("time", values.time);
-    formData.append("pickupImage", values.pickupImage);
-
-    const response = await Axios.post("/register", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-
-    if (response.status === 200) {
-      resetForm();
-      Swal.fire({
-        title: "Success",
-        text: "Pickup request submitted successfully!",
-        icon: "success",
-        confirmButtonText: "OK",
-      });
-    }
-  } catch (error) {
-    console.error("Error submitting form:", error);
-    Swal.fire({
-      title: "Error",
-      text: "Failed to submit the pickup request. Please try again later.",
-      icon: "error",
-      confirmButtonText: "OK",
-    });
-  }
-  setSubmitting(false); // Ensure the submitting state is set back to false after submission
 };
 
 const Pickup = () => {
   const [previewImage, setPreviewImage] = useState(null);
+  const navigate = useNavigate(); // Use the navigate hook
 
   // Clean up image preview on component unmount
   useEffect(() => {
@@ -81,13 +45,59 @@ const Pickup = () => {
     setPreviewImage(URL.createObjectURL(file));
   };
 
+  // Handle vehicle number change (uppercase and numbers only)
+  const handleVehicleNumberChange = (event, setFieldValue) => {
+    const formattedValue = event.target.value.toUpperCase().replace(/[^A-Z0-9]/g, ''); // Allow only uppercase and numbers
+    setFieldValue("vehiclenumber", formattedValue);
+  };
+
+  // Submit handler
+  const handleSubmit = async (values, { resetForm, setSubmitting }) => {
+    try {
+      const formData = new FormData();
+      formData.append("full_name", values.full_name);
+      formData.append("phone", values.phone);
+      formData.append("place", values.place);
+      formData.append("vehiclenumber", values.vehiclenumber);
+      formData.append("pickupImage", values.pickupImage);
+
+      const response = await Axios.post("/Nso2/user/register", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      if (response.status === 200) {
+        resetForm();
+        Swal.fire({
+          title: "Success",
+          text: "Pickup request submitted successfully!",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+
+        // Redirect to homepage after successful form submission
+        navigate("/");  // This will redirect to the homepage
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      Swal.fire({
+        title: "Error",
+        text: "Failed to submit the pickup request. Please try again later.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    }
+    setSubmitting(false); // Ensure the submitting state is set back to false after submission
+  };
+
   return (
     <div className="p-6 bg-white mt-24 flex items-center justify-center">
       <div className="container max-w-screen-lg mx-auto">
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={(values, actions) => handleSubmit(values, actions)}
+          onSubmit={(values, actions) => handleSubmit(values, actions)} // Pass navigate to handleSubmit
         >
           {({ setFieldValue, isSubmitting }) => (
             <Form>
@@ -153,7 +163,7 @@ const Pickup = () => {
                           id="vehiclenumber"
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           style={{ textTransform: "uppercase" }}
-                          onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
+                          onInput={(e) => handleVehicleNumberChange(e, setFieldValue)} // Handle input to format as uppercase and numbers only
                         />
                         <ErrorMessage
                           name="vehiclenumber"
@@ -162,22 +172,7 @@ const Pickup = () => {
                         />
                       </div>
 
-                      <div className="md:col-span-2">
-                        <label htmlFor="time">Time</label>
-                        <Field
-                          type="time"
-                          name="time"
-                          id="time"
-                          min="12:00"
-                          max="19:00"
-                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                        />
-                        <ErrorMessage
-                          name="time"
-                          component="div"
-                          className="text-red-500"
-                        />
-                      </div>
+                      {/* Removed time input as requested */}
 
                       <div className="md:col-span-5">
                         <label htmlFor="pickupImage">Upload Image of Items</label>
@@ -200,7 +195,7 @@ const Pickup = () => {
                 </div>
 
                 {/* Preview Image */}
-                <div className="mt-4  flex justify-center">
+                <div className="mt-4 flex justify-center">
                   {previewImage && (
                     <img
                       src={previewImage}
