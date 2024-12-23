@@ -89,10 +89,11 @@ const Pickup = () => {
         navigate("/");  // This will redirect to the homepage
       }
     } catch (error) {
-      console.error("Error submitting form:", error);
+      
+      console.log(error)
       Swal.fire({
         title: "Error",
-        text: "Failed to submit the pickup request. Please try again later.",
+        text: error.response.data.message,
         icon: "error",
         confirmButtonText: "OK",
       });
