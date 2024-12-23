@@ -146,16 +146,6 @@ const InvoiceTemplate = () => {
         </div>
       </div>
 
-      {/* Customer Details */}
-      {/* (same layout as before for customer and vehicle details) */}
-
-      {/* Items Table */}
-      {/* (same layout as before for items) */}
-
-      {/* Footer */}
-      {/* (same layout as before for footer) */}
-
-      {/* Download Button */}
       <div className="text-center mt-8">
         <button
           onClick={downloadPDF}
