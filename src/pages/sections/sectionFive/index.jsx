@@ -13,7 +13,7 @@ const Index = () => {
   const handleSearch = () => {
 
     console.log('Searching for vehicle number:', vehicleNumber);
-    Navigate('/vehicle-datails')
+    Navigate('/vehicle-details')
     
   };
 
