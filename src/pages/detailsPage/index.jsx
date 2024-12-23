@@ -72,8 +72,61 @@ const InvoiceTemplate = () => {
   };
 
   const downloadPDF = () => {
-    const doc = new jsPDF('p', 'mm', 'a4');
-    // PDF generation logic...
+    const doc = new jsPDF('p', 'mm', 'a4'); // A4 paper size
+
+    // Set background color (for header)
+    doc.setFillColor(234, 67, 53); // Red background
+    doc.rect(0, 0, 210, 30, 'F'); // Create a background for the header
+
+    // Add company name and details
+    doc.setFontSize(18);
+    doc.setTextColor(255, 255, 255); // White text for header
+    doc.text(invoiceData.companyDetails.name, 14, 20);
+    doc.setFontSize(10);
+    doc.text(`GSTIN: ${invoiceData.companyDetails.gstin}`, 14, 25);
+    doc.text(`State: ${invoiceData.companyDetails.state}`, 14, 30);
+
+    // Add invoice details
+    doc.setTextColor(0, 0, 0); // Black text for the rest
+    doc.text(`Invoice No.: ${invoiceData.invoiceDetails.number}`, 14, 50);
+    doc.text(`Date: ${invoiceData.invoiceDetails.date}`, 14, 55);
+    doc.text(`Time: ${invoiceData.invoiceDetails.time}`, 14, 60);
+    doc.text(`Place of Supply: ${invoiceData.invoiceDetails.placeOfSupply}`, 14, 65);
+
+    // Add customer details
+    doc.text(`Bill To: ${invoiceData.customerDetails.name}`, 14, 80);
+    doc.text(invoiceData.customerDetails.address, 14, 85);
+    doc.text(`Contact No.: ${invoiceData.customerDetails.contact}`, 14, 90);
+
+    // Create a table for items
+    let y = 100;
+    doc.setFontSize(10);
+    doc.text('Item Name', 14, y);
+    doc.text('Quantity', 100, y);
+    doc.text('Price/Unit', 130, y);
+    doc.text('Discount', 160, y);
+    doc.text('GST', 190, y);
+    doc.text('Amount', 220, y);
+    y += 10;
+
+    // Table rows for each item
+    invoiceData.items.forEach((item, index) => {
+      doc.text(item.name, 14, y);
+      doc.text(item.quantity.toString(), 100, y);
+      doc.text(`₹ ${item.price.toFixed(2)}`, 130, y);
+      doc.text(item.discount, 160, y);
+      doc.text(`₹ ${item.gst}`, 190, y);
+      doc.text(`₹ ${item.amount.toFixed(2)}`, 220, y);
+      y += 10;
+    });
+
+    // Add total, received, and balance info
+    y += 10;
+    doc.text(`Total: ₹ 1,750.00`, 14, y);
+    doc.text(`Received: ₹ 1,750.00`, 14, y + 5);
+    doc.text(`Balance: ₹ 0.00`, 14, y + 10);
+
+    // Save the PDF as 'invoice.pdf'
     doc.save('invoice.pdf');
   };
 
