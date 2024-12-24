@@ -26,22 +26,36 @@ export default function Invoice() {
       return;
     }
 
-    const canvas = await html2canvas(element, {
-      scale: 2,
-    });
-    const data = canvas.toDataURL("image/png");
-
     const pdf = new jsPDF({
       orientation: "portrait",
       unit: "px",
       format: "a4",
     });
 
-    const imgProperties = pdf.getImageProperties(data);
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+    const canvas = await html2canvas(element, {
+      scale: 2,
+    });
+    const imgData = canvas.toDataURL("image/png");
 
-    pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+    const imgWidth = canvas.width;
+    const imgHeight = canvas.height;
+
+    let remainingHeight = imgHeight;
+    let position = 0;
+
+    while (remainingHeight > 0) {
+      const heightToRender = Math.min(remainingHeight, imgHeight);
+      pdf.addImage(imgData, "PNG", 0, position, pdfWidth, (heightToRender * pdfWidth) / imgWidth);
+      remainingHeight -= heightToRender;
+
+      if (remainingHeight > 0) {
+        pdf.addPage();
+        position = 0;
+      }
+    }
+
     pdf.save("Invoice.pdf");
   };
 
@@ -57,7 +71,7 @@ export default function Invoice() {
               <h4 className="text-[10px] sm:text-[12px] text-red-500">
                 BIKE AND CAR - ALL VEHICLE
               </h4>
-              <div className="mt-3 space-y-1">
+              <div className="mt-3 mb-3 space-y-1">
                 <div className="flex items-center space-x-2 sm:space-x-4">
                   <FaInstagram className="text-pink-600 text-sm sm:text-xl" />
                   <span className="text-gray-700 text-[10px] sm:text-[12px] font-semibold">
