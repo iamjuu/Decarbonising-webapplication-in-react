@@ -64,7 +64,7 @@ export default function Invoice() {
       <div className="bg-white shadow-lg rounded-lg p-4 sm:p-6 w-full max-w-2xl">
         <div ref={printRef} className="  bg-white p-2">
           {/* Header Section */}
-          <div className="flex flex-wrap justify-between items-center  mb-3">
+          <div className="flex flex-wrap justify-between items-center  ">
             <div>
             <h2 className="text-red-500 text-sm sm:text-lg">Nos2 DECARBONISING</h2>
               <h4 className="text-[10px] sm:text-[12px] text-red-500">
@@ -74,14 +74,14 @@ export default function Invoice() {
             </div>
             <div className="text-center">
            
-              <div className="mt-3 mb-3 space-y-1">
+              <div className="  space-y-1">
                 <div className="flex items-center space-x-2 sm:space-x-4">
                   <FaInstagram className="text-pink-600 text-sm sm:text-xl" />
                   <span className="text-gray-700 text-[10px] sm:text-[12px] font-semibold">
                     nos2kannur_enginedecarbonising
                   </span>
                 </div>
-                <div className="flex items-center space-x-2 sm:space-x-4">
+                <div className="flex items-center ">
                   <CgWebsite className="text-blue-600 text-sm sm:text-xl" />
                   <span className="text-gray-700 text-[10px] sm:text-[12px] font-semibold">
                     www.Nos2Decarbanising.com
@@ -112,7 +112,7 @@ export default function Invoice() {
           </div>
 
           {/* Vehicle Info Section */}
-          <div className="flex flex-wrap justify-between mb-8">
+          <div className="flex flex-wrap justify-between ">
             <div className="w-full sm:w-36">
               <p className="flex justify-between text-[10px] sm:text-[13px]">
                 Year <span className="font-bold">2012</span>
@@ -133,12 +133,12 @@ export default function Invoice() {
                 LHCE Used <span className="font-bold">60 ml</span>
               </p>
             </div>
-            <img className="w-16 sm:w-24 mt-4 sm:mt-0" src={Pic1} alt="Vehicle" />
+            <img className="w-16 sm:w-24 sm:mt-0" src={Pic1} alt="Vehicle" />
           </div>
 
           {/* Table Section */}
           <div className="overflow-x-auto">
-            <table className="w-full mb-8 border-collapse">
+            <table className="w-full  mt-1 border-collapse">
               <thead>
                 <tr className="bg-gray-100">
                   <th className="border p-1 sm:p-2">Si-No</th>
