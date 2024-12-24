@@ -1,13 +1,24 @@
-
+import React, { useEffect, useRef } from "react";
+import JsBarcode from "jsbarcode";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import React from "react";
-import {Pic1,Logoo} from '../../assets'
-import { FaInstagram, FaFacebook, FaWhatsapp } from "react-icons/fa";
+import { Pic1, Logoo } from "../../assets";
+import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { CgWebsite } from "react-icons/cg";
 
 export default function Invoice() {
-  const printRef = React.useRef(null);
+  const barcodeRef = useRef(null);
+  const printRef = useRef(null);
+
+  useEffect(() => {
+    if (barcodeRef.current) {
+      JsBarcode(barcodeRef.current, "123456789012", {
+        format: "CODE128",
+        displayValue: true,
+        fontSize: 18,
+      });
+    }
+  }, []);
 
   const handleDownloadPdf = async () => {
     const element = printRef.current;
@@ -28,146 +39,141 @@ export default function Invoice() {
 
     const imgProperties = pdf.getImageProperties(data);
     const pdfWidth = pdf.internal.pageSize.getWidth();
-
     const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
 
     pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight);
-    pdf.save("examplepdf.pdf");
+    pdf.save("Invoice.pdf");
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8 flex flex-col items-center">
-      <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-2xl">
-        <div ref={printRef} className="p-8 bg-white border  border-gray-200">
-          <div className="flex  border-b border-gray-400 mb-3  justify-between">
-<div>  <img className="w-16" src={Logoo} alt="" /></div>
-<div>
-  <div  className=" flex flex-col gap-5 ">
-    <div  className="text-center">
-     <h2 className="text-red-500">Nos2 DECARBONISING</h2>
-  <h4 className="text-[12px] text-red-500">BIKE AND CAR  - ALL VEHICLE</h4>
-    </div>
-    <div className="flex gap-1 mb-3 flex-col  ">
-      {/* Instagram */}
-      <div className="flex items-center space-x-4">
-        <FaInstagram className="text-pink-600 text-xl" />
-        <span className="text-gray-700   text-[12px] font-semibold">nos2kannur_enginedecarbonising</span>
-      </div>
+    <div className="min-h-screen bg-gray-100 p-4 sm:p-8 flex flex-col items-center">
+      <div className="bg-white shadow-lg rounded-lg p-4 sm:p-6 w-full max-w-2xl">
+        <div ref={printRef} className="p-4 sm:p-8 bg-white border border-gray-200">
+          {/* Header Section */}
+          <div className="flex flex-wrap justify-between items-center border-b border-gray-400 mb-3">
+            <img className="w-12 sm:w-16" src={Logoo} alt="Logo" />
+            <div className="text-center">
+              <h2 className="text-red-500 text-sm sm:text-lg">Nos2 DECARBONISING</h2>
+              <h4 className="text-[10px] sm:text-[12px] text-red-500">
+                BIKE AND CAR - ALL VEHICLE
+              </h4>
+              <div className="mt-3 space-y-1">
+                <div className="flex items-center space-x-2 sm:space-x-4">
+                  <FaInstagram className="text-pink-600 text-sm sm:text-xl" />
+                  <span className="text-gray-700 text-[10px] sm:text-[12px] font-semibold">
+                    nos2kannur_enginedecarbonising
+                  </span>
+                </div>
+                <div className="flex items-center space-x-2 sm:space-x-4">
+                  <CgWebsite className="text-blue-600 text-sm sm:text-xl" />
+                  <span className="text-gray-700 text-[10px] sm:text-[12px] font-semibold">
+                    www.Nos2Decarbanising.com
+                  </span>
+                </div>
+                <div className="flex items-center space-x-2 sm:space-x-4">
+                  <FaWhatsapp className="text-green-600 text-sm sm:text-xl" />
+                  <span className="text-gray-700 text-[10px] sm:text-[12px] font-semibold">
+                    7025715250
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
 
-      {/* Facebook */}
-      <div className="flex items-center space-x-4">
-        <CgWebsite className="text-blue-600 text-xl" />
-        <span className="text-gray-700   text-[12px] font-semibold">www.Nos2Decarbanising.com</span>
-      </div>
-
-      {/* WhatsApp */}
-      <div className="flex items-center space-x-4">
-        <FaWhatsapp className="text-green-600 text-xl" />
-        <span className="text-gray-700  text-[12px] font-semibold">7025715250</span>
-      </div>
-    </div>
-  </div>
-  </div>     
-
-     </div>
-          <div className="flex justify-between    items-center mb-8">
+          {/* Owner and Vehicle Details */}
+          <div className="flex flex-wrap justify-between mb-8">
             <div>
-           <p className="text-[13px]">Owner Name:Muhammed ajmal</p>
-           <p className="text-[13px]">Phone: 7025715250</p>
-           <p className="text-[13px]">Vehicle Number: KL 13 AQ 1596</p>
-
+              <p className="text-[10px] sm:text-[13px]">Owner Name: Muhammed Ajmal</p>
+              <p className="text-[10px] sm:text-[13px]">Phone: 7025715250</p>
+              <p className="text-[10px] sm:text-[13px]">Vehicle Number: KL 13 AQ 1596</p>
             </div>
             <div className="text-right">
-             <p  className="text-[13px]">Date:  31/12/2024</p>
-             <p className="text-[13px]">Time  11:30 </p>
-             <p className="text-[13px]">Invoice No: 12dsd442</p>
+              <p className="text-[10px] sm:text-[13px]">Date: 31/12/2024</p>
+              <p className="text-[10px] sm:text-[13px]">Time: 11:30</p>
+              <p className="text-[10px] sm:text-[13px]">Invoice No: 12dsd442</p>
             </div>
           </div>
 
-          <div className="mb-8   justify-between flex ">
-            <div className=" w-36 ">
-              <div className="flex justify-between">
-<p  className="text-[13px]">year  </p>
-<p className="text-[13px]  font-bold">2012</p>
- </div>
-
- <div className="flex justify-between">
-<p  className="text-[13px]">Vehicle Model  </p>
-<p className="text-[13px]  font-bold">Bike</p>
- </div>
-
- <div className="flex justify-between">
-<p  className="text-[13px]">Kilometer </p>
-<p className="text-[13px]  font-bold">120000</p>
- </div>
-
- <div className="flex justify-between">
-<p  className="text-[13px]">Fuel  </p>
-<p className="text-[13px]  font-bold">Petrol</p>
- </div>
-
- <div className="flex justify-between">
-<p  className="text-[13px]">Smoke </p>
-<p className="text-[13px]  font-bold">Normal</p>
- </div>
-
- <div className="flex justify-between">
-<p  className="text-[13px]">LHCE USED </p>  
-<p className="text-[13px]  font-bold">60 Ml</p>        
- </div>
+          {/* Vehicle Info Section */}
+          <div className="flex flex-wrap justify-between mb-8">
+            <div className="w-full sm:w-36">
+              <p className="flex justify-between text-[10px] sm:text-[13px]">
+                Year <span className="font-bold">2012</span>
+              </p>
+              <p className="flex justify-between text-[10px] sm:text-[13px]">
+                Vehicle Model <span className="font-bold">Bike</span>
+              </p>
+              <p className="flex justify-between text-[10px] sm:text-[13px]">
+                Kilometer <span className="font-bold">120000</span>
+              </p>
+              <p className="flex justify-between text-[10px] sm:text-[13px]">
+                Fuel <span className="font-bold">Petrol</span>
+              </p>
+              <p className="flex justify-between text-[10px] sm:text-[13px]">
+                Smoke <span className="font-bold">Normal</span>
+              </p>
+              <p className="flex justify-between text-[10px] sm:text-[13px]">
+                LHCE Used <span className="font-bold">60 ml</span>
+              </p>
             </div>
-            <div>
-              <img className="w-24" src={Pic1} alt="" />
-            </div>
-
+            <img className="w-16 sm:w-24 mt-4 sm:mt-0" src={Pic1} alt="Vehicle" />
           </div>
 
-          <table className="w-full mb-8 border-collapse">
-            <thead>
-              <tr className="bg-gray-100">
-                <th className="border p-2 text-left">Si-No</th>
-                <th className="border p-2 text-right">Details</th>
-                <th className="border p-2 text-right">Qty</th>
-                <th className="border p-2 text-right">Each</th>
-                <th className="border p-2 text-right"> Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="border p-2">1</td>
-                <td className="border p-2 text-right">engine</td>
-                <td className="border p-2 text-right">1</td>
-                <td className="border p-2 text-right">1,500.00</td>
-                <td className="border p-2 text-right">$1,500.00</td>  
-            </tr>
-            <tr>
-  <td className="border p-2 text-right" colSpan={4}>
-    Total Amount
-  </td>
-  
-  <td className="border p-2 text-right font-bold">$1,500.00</td>
-</tr>
-  <p> Discount   120/-</p>
+          {/* Table Section */}
+          <div className="overflow-x-auto">
+            <table className="w-full mb-8 border-collapse">
+              <thead>
+                <tr className="bg-gray-100">
+                  <th className="border p-1 sm:p-2">Si-No</th>
+                  <th className="border p-1 sm:p-2 text-right">Details</th>
+                  <th className="border p-1 sm:p-2 text-right">Qty</th>
+                  <th className="border p-1 sm:p-2 text-right">Each</th>
+                  <th className="border p-1 sm:p-2 text-right">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="border p-1 sm:p-2">1</td>
+                  <td className="border p-1 sm:p-2 text-right">Engine</td>
+                  <td className="border p-1 sm:p-2 text-right">1</td>
+                  <td className="border p-1 sm:p-2 text-right">1,500.00</td>
+                  <td className="border p-1 sm:p-2 text-right">$1,500.00</td>
+                </tr>
+                <tr>
+                  <td colSpan="4" className="border p-1 sm:p-2 text-right">
+                    Total Amount
+                  </td>
+                  <td className="border p-1 sm:p-2 text-right font-bold">$1,500.00</td>
+                </tr>
+                <tr>
+                  <td colSpan="4" className="border p-1 sm:p-2 text-right">
+                    Discount
+                  </td>
+                  <td className="border p-1 sm:p-2 text-right font-bold">-$120.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-<div>
-  <h2>Teams</h2>
-</div>
-            
-            </tbody>
-          </table>
-
-          <div className="flex justify-end">
-            <div className="w-64">
-            
-          
-            </div>
+          {/* Terms Section */}
+          <div className="p-4">
+            <h2 className="font-bold text-[12px] sm:text-[14px]">TERMS</h2>
+            <ol className="text-[10px] sm:text-[12px] list-decimal ml-4">
+              <li>Your Next Service is After 12 Months or 140,000 km</li>
+              <li>Decarbonize your vehicle once a year to keep the engine healthy</li>
+              <li>
+                If you have queries or complaints regarding our service, feel
+                free to contact our technical team
+              </li>
+            </ol>
           </div>
         </div>
 
+        {/* PDF Download Button */}
         <div className="mt-6 flex justify-center">
           <button
             onClick={handleDownloadPdf}
-            className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300"
+            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300"
           >
             Download PDF
           </button>
