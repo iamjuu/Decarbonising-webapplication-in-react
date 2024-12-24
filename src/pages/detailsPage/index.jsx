@@ -60,17 +60,20 @@ export default function Invoice() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4 sm:p-8 flex flex-col items-center">
+    <div className="min-h-screen bg-gray-100 sm:p-8 flex flex-col items-center">
       <div className="bg-white shadow-lg rounded-lg p-4 sm:p-6 w-full max-w-2xl">
-        <div ref={printRef} className="p-4 sm:p-8 bg-white border border-gray-200">
+        <div ref={printRef} className="  bg-white p-2">
           {/* Header Section */}
-          <div className="flex flex-wrap justify-between items-center border-b border-gray-400 mb-3">
-            <img className="w-12 sm:w-16" src={Logoo} alt="Logo" />
-            <div className="text-center">
-              <h2 className="text-red-500 text-sm sm:text-lg">Nos2 DECARBONISING</h2>
+          <div className="flex flex-wrap justify-between items-center  mb-3">
+            <div>
+            <h2 className="text-red-500 text-sm sm:text-lg">Nos2 DECARBONISING</h2>
               <h4 className="text-[10px] sm:text-[12px] text-red-500">
                 BIKE AND CAR - ALL VEHICLE
               </h4>
+            <img className="w-12 sm:w-16" src={Logoo} alt="Logo" />
+            </div>
+            <div className="text-center">
+           
               <div className="mt-3 mb-3 space-y-1">
                 <div className="flex items-center space-x-2 sm:space-x-4">
                   <FaInstagram className="text-pink-600 text-sm sm:text-xl" />
