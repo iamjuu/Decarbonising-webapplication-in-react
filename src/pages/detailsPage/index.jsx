@@ -112,7 +112,7 @@ export default function Invoice() {
           </div>
 
           {/* Vehicle Info Section */}
-          <div className="flex flex-wrap justify-between mb-8">
+          <div className="flex flex-wrap justify-between ">
             <div className="w-full sm:w-36">
               <p className="flex justify-between text-[10px] sm:text-[13px]">
                 Year <span className="font-bold">2012</span>
@@ -133,12 +133,12 @@ export default function Invoice() {
                 LHCE Used <span className="font-bold">60 ml</span>
               </p>
             </div>
-            <img className="w-16 sm:w-24 mt-4 sm:mt-0" src={Pic1} alt="Vehicle" />
+            <img className="w-16 sm:w-24 sm:mt-0" src={Pic1} alt="Vehicle" />
           </div>
 
           {/* Table Section */}
           <div className="overflow-x-auto">
-            <table className="w-full mb-8 border-collapse">
+            <table className="w-full  mt-1 border-collapse">
               <thead>
                 <tr className="bg-gray-100">
                   <th className="border p-1 sm:p-2">Si-No</th>
