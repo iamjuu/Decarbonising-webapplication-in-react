@@ -8,7 +8,6 @@ import SectionTwo from './sectionTwo';
 import SectionThree from './sectionThree';
 const SectionFour = lazy(() => import('./sectionFour'));
 import SectionFive from './sectionFive'
-import SectionTen from './sectionTen'
 const Index = () => {
   useEffect(() => {
     AOS.init({ duration: 1000 }); // Initialize AOS with a duration of 1000ms
