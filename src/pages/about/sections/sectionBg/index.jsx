@@ -1,15 +1,15 @@
 // About.js
 import { Container, ContainerWrap, BgContainer } from "../../styles";
-import { Service1 } from "../../../../assets";
+import {  Service3} from "../../../../assets";
 import { Main } from "./style";
 
 const index = () => {
-  const text = "Being a full-time psychologist, I help solving issues to heal mental problems for people.";
+  const text = "This i s website to service your vehicles ";
   
   return (
     <>
       <Container>
-        <BgContainer bg={Service1}>
+        <BgContainer bg={Service3}>
           <ContainerWrap>
             <Main>
               <h1>

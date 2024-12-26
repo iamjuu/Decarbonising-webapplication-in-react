@@ -1,7 +1,7 @@
 
 import {  Banner,Logoo, Bgimg, Bookimg,Consulting,Sleepless,depressed } from "../assets";
 export const Data = {
-  title: "Best psychologist",
+  title: " Decarbonization",
   p:'Psychology is the scientific study of the mind and behavior. It explores how individuals think, feel, and act, both as individuals and within groups, as well as the biological, psychological, and social processes underlying these behaviors.'
 };
 
@@ -193,7 +193,7 @@ export const AboutSectionThree = [
   },
 ];
 
-// ***********************************program pages data *************************************************************
+
 
 
 // *******************************Contect page******************************
