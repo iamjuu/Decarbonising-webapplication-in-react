@@ -20,6 +20,7 @@ const initialValues = {
   phone: "",
   place: "",
   vehiclenumber: "",
+  vehicleyear:"",
   time: "",
   pickupImage: null,
 };
@@ -32,6 +33,8 @@ const handleSubmit = async (values, { resetForm, setSubmitting }) => {
     formData.append("phone", values.phone);
     formData.append("place", values.place);
     formData.append("vehiclenumber", values.vehiclenumber);
+    formData.append("vehicleyear", values.vehicleyear);
+
     formData.append("time", values.time);
     formData.append("pickupImage", values.pickupImage);
 
@@ -157,6 +160,22 @@ const Pickup = () => {
                         />
                         <ErrorMessage
                           name="vehiclenumber"
+                          component="div"
+                          className="text-red-500"
+                        />
+                      </div>
+                      <div className="md:col-span-2">
+                        <label htmlFor="vehicleyear">Vehicle year</label>
+                        <Field
+                          type="text"
+                          name="vehicleyear"
+                          id="vehicleyear"
+                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          style={{ textTransform: "uppercase" }}
+                          onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
+                        />
+                        <ErrorMessage
+                          name="vehicleyear"
                           component="div"
                           className="text-red-500"
                         />
