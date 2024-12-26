@@ -21,6 +21,26 @@ import Medition from './Embrace Serenity_ Master Emotional Control with Mindfuln
 import Sleepless from './SleepingPateint.jpg'
 import depressed from './pexels-timur-weber-8560013.jpg'
 
-export {Banner,Contect,Header,Service1,Service2,Service3,Service4,Testmonial1,Testmonial2,Testmonial3,customisation,
-    experience,Pic1,Pic2,Pic3,Logoo,Consulting,Bgimg,Bookimg,Medition,Sleepless,depressed
+export {Banner,
+    Contect,
+    Header,
+    Service1,
+    Service2,
+    Service3,
+    Service4,
+    Testmonial1,
+    Testmonial2,
+    Testmonial3,
+    customisation,
+    experience,
+    Pic1,
+    Pic2,
+    Pic3,
+    Logoo,
+    Consulting,
+    Bgimg,
+    Bookimg,
+    Medition,
+    Sleepless,
+    depressed
 }

@@ -16,14 +16,13 @@
                 <p>{AboutSectionOne.p}</p>
                 <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', alignItems: 'center' }}>
                   <h4>{AboutSectionOne.h4}</h4>
-                  <Btn btnName={'About '}  color={'white'} bg={'#a57355'} width={'130px'} />
+                  <Btn btnName={'About '}  color={'white'} bg={'#f41818'} width={'130px'} />
                 </div>
               </div>
               <div className="left" data-aos="fade-down" data-aos-delay="400">
                 <img src={AboutSectionOne.img} alt="" />
               </div>
             </div>
-    
             <div className="third" data-aos="fade-up" data-aos-delay="600"></div>
           </Main>
         </ContainerWrap>
