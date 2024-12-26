@@ -60,9 +60,9 @@ export default function Invoice() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 sm:p-8 flex flex-col items-center">
-      <div className="bg-white shadow-lg rounded-lg p-4 sm:p-6 w-full max-w-2xl">
-        <div ref={printRef} className="  bg-white p-2">
+    <div className="min-h-screen bg-gray-100 sm:p-8  flex flex-col items-center">
+      <div className="bg-white shadow-lg rounded-lg  sm:p-6 w-full max-w-2xl">
+        <div ref={printRef} className="  bg-white p-8">
           {/* Header Section */}
           <div className="flex flex-wrap justify-between items-center  ">
             <div>
@@ -98,7 +98,7 @@ export default function Invoice() {
           </div>
 
           {/* Owner and Vehicle Details */}
-          <div className="flex flex-wrap justify-between mb-8">
+          <div className="flex flex-wrap justify-between   mb-1">
             <div>
               <p className="text-[10px] sm:text-[13px]">Owner Name: Muhammed Ajmal</p>
               <p className="text-[10px] sm:text-[13px]">Phone: 7025715250</p>
