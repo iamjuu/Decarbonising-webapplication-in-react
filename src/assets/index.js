@@ -14,7 +14,33 @@ import Pic1 from './IMG-20240921-WA0055.jpg'
 import Pic2 from './IMG-20240921-WA0057.jpg'
 import Pic3 from './maa.jpg'
 import Logoo from './WhatsApp Image 2024-12-17 at 15.14.26_0a3888e2.jpg'
+import Consulting from './Consulting.jpg'
+import Bgimg from './vistaBg.jpg'
+import Bookimg from './book.png'
+import Medition from './Embrace Serenity_ Master Emotional Control with Mindfulness.jpeg'
+import Sleepless from './SleepingPateint.jpg'
+import depressed from './pexels-timur-weber-8560013.jpg'
 
-export {Banner,Contect,Header,Service1,Service2,Service3,Service4,Testmonial1,Testmonial2,Testmonial3,customisation,
-    experience,Pic1,Pic2,Pic3,Logoo,
+export {Banner,
+    Contect,
+    Header,
+    Service1,
+    Service2,
+    Service3,
+    Service4,
+    Testmonial1,
+    Testmonial2,
+    Testmonial3,
+    customisation,
+    experience,
+    Pic1,
+    Pic2,
+    Pic3,
+    Logoo,
+    Consulting,
+    Bgimg,
+    Bookimg,
+    Medition,
+    Sleepless,
+    depressed
 }

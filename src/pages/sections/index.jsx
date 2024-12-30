@@ -19,15 +19,17 @@ const Index = () => {
       <div data-aos="fade-up">
         <SectionOne />
       </div>
+      
       <div data-aos="fade-down">
         <SectionTwo />
       </div>
       <div data-aos="fade-up">
-        <SectionThree />
-      </div>
-      <div data-aos="fade-up">
         <SectionFive />
       </div>
+      <div data-aos="fade-up">
+        <SectionThree />
+      </div>
+   
       <Suspense fallback={<div>Loading Section Four...</div>}>
         <div data-aos="fade-down">
           <SectionFour />

@@ -1,171 +1,201 @@
-import React from 'react';
-import { jsPDF } from 'jspdf';
-import { Logoo } from '../../assets';
+import React, { useEffect, useRef } from "react";
+import JsBarcode from "jsbarcode";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+import { Pic1, Logoo } from "../../assets";
+import { FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { CgWebsite } from "react-icons/cg";
 
-const InvoiceTemplate = () => {
-  const invoiceData = {
-    companyDetails: {
-      name: "NOS2 ENGINE DECARBONISING",
-      gstin: "32AAOFN1627J1Z8",
-      phone: "8921339559, 8590602551",
-      email: "nos2enginedecarbonising@gmail.com",
-      address: "Opp. Aquatics Complex, Near North Bus Stand, Thrissur - 680020",
-      state: "32-Kerala"
-    },
-    customerDetails: {
-      name: "SREEVIBURAJ",
-      address: "VENKIDANGU",
-      contact: "9895278353",
-      state: "32-Kerala"
-    },
-    invoiceDetails: {
-      number: "799",
-      date: "02-12-2024",
-      time: "02:12 PM",
-      placeOfSupply: "32-Kerala",
-      vehicleType: "BIKE",
-      vehicleDetails: "BAJAJ PULSAR RS200",
-      vehicleNumber: "KL46S3965"
-    },
-    items: [
-      {
-        name: "BIKE STAGE 3",
-        quantity: 1,
-        price: 2118.64,
-        discount: "83.158%",
-        gst: "64.23 (18.0%)",
-        amount: 421.04
-      },
-      {
-        name: "FUEL LINE CLEANING (LHCE)",
-        quantity: 10,
-        price: 11.86,
-        discount: "0.0%",
-        gst: "21.36 (18.0%)",
-        amount: 140.00
-      },
-      {
-        name: "NOS2 20W-50 NORMAL",
-        quantity: 1.2,
-        price: 415.25,
-        discount: "0.0%",
-        gst: "89.69 (18.0%)",
-        amount: 588.00
-      },
-      {
-        name: "BAJAJ PULSAR RS200 OIL FILTER",
-        quantity: 1,
-        price: 186.44,
-        discount: "0.0%",
-        gst: "33.56 (18.0%)",
-        amount: 220.00
-      },
-      {
-        name: "LABOUR CHARGE",
-        quantity: 1,
-        price: 296.61,
-        discount: "0.0%",
-        gst: "53.39 (18.0%)",
-        amount: 350.00
-      }
-    ]
-  };
+export default function Invoice() {
+  const barcodeRef = useRef(null);
+  const printRef = useRef(null);
 
-  const downloadPDF = () => {
-    const doc = new jsPDF('p', 'mm', 'a4'); // Use A4 paper size (210mm x 297mm)
-    
-    // Set up the content of the PDF
-    doc.setFont('Arial', 'normal');
-    
-    // Add Company Name
-    doc.setFontSize(18);
-    doc.text(invoiceData.companyDetails.name, 14, 20);
-    doc.setFontSize(10);
-    doc.text(`GSTIN: ${invoiceData.companyDetails.gstin}`, 14, 30);
-    doc.text(`State: ${invoiceData.companyDetails.state}`, 14, 35);
-    
-    // Add Invoice Details
-    doc.text(`Invoice No.: ${invoiceData.invoiceDetails.number}`, 14, 50);
-    doc.text(`Date: ${invoiceData.invoiceDetails.date}`, 14, 55);
-    doc.text(`Time: ${invoiceData.invoiceDetails.time}`, 14, 60);
-    doc.text(`Place of Supply: ${invoiceData.invoiceDetails.placeOfSupply}`, 14, 65);
-    
-    // Add Customer Details
-    doc.text(`Bill To: ${invoiceData.customerDetails.name}`, 14, 80);
-    doc.text(invoiceData.customerDetails.address, 14, 85);
-    doc.text(`Contact No.: ${invoiceData.customerDetails.contact}`, 14, 90);
-    
-    // Add Items Table
-    let y = 100;
-    doc.text('Item Name', 14, y);
-    doc.text('Quantity', 100, y);
-    doc.text('Price/Unit', 130, y);
-    doc.text('Discount', 160, y);
-    doc.text('GST', 190, y);
-    doc.text('Amount', 220, y);
-    y += 10;
+  useEffect(() => {
+    if (barcodeRef.current) {
+      JsBarcode(barcodeRef.current, "123456789012", {
+        format: "CODE128",
+        displayValue: true,
+        fontSize: 18,
+      });
+    }
+  }, []);
 
-    invoiceData.items.forEach((item, index) => {
-      doc.text(item.name, 14, y);
-      doc.text(item.quantity.toString(), 100, y);
-      doc.text(`₹ ${item.price}`, 130, y);
-      doc.text(item.discount, 160, y);
-      doc.text(`₹ ${item.gst}`, 190, y);
-      doc.text(`₹ ${item.amount}`, 220, y);
-      y += 10;
+  const handleDownloadPdf = async () => {
+    const element = printRef.current;
+    if (!element) {
+      return;
+    }
+
+    const pdf = new jsPDF({
+      orientation: "portrait",
+      unit: "px",
+      format: "a4",
     });
 
-    // Add Total Section
-    y += 10;
-    doc.text(`Total: ₹ 1,750.00`, 14, y);
-    doc.text(`Received: ₹ 1,750.00`, 14, y + 5);
-    doc.text(`Balance: ₹ 0.00`, 14, y + 10);
+    const canvas = await html2canvas(element, {
+      scale: 2,
+    });
+    const imgData = canvas.toDataURL("image/png");
 
-    // Save the PDF
-    doc.save('invoice.pdf');
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+    const imgWidth = canvas.width;
+    const imgHeight = canvas.height;
+
+    let remainingHeight = imgHeight;
+    let position = 0;
+
+    while (remainingHeight > 0) {
+      const heightToRender = Math.min(remainingHeight, imgHeight);
+      pdf.addImage(imgData, "PNG", 0, position, pdfWidth, (heightToRender * pdfWidth) / imgWidth);
+      remainingHeight -= heightToRender;
+
+      if (remainingHeight > 0) {
+        pdf.addPage();
+        position = 0;
+      }
+    }
+
+    pdf.save("Invoice.pdf");
   };
 
   return (
-    <div className="max-[700px] mx-auto p-8 bg-white">
-      {/* Existing invoice layout */}
-      <div className="bg-red-600 text-white p-6 rounded-t-lg">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center space-x-4">
-            <div className="w-16 h-16 rounded">
-              <img src={Logoo} alt="" />
-            </div>
+    <div className="min-h-screen bg-gray-100 sm:p-8  flex flex-col items-center">
+      <div className="bg-white shadow-lg rounded-lg  sm:p-6 w-full max-w-2xl">
+        <div ref={printRef} className="  bg-white p-8">
+          {/* Header Section */}
+          <div className="flex flex-wrap justify-between items-center  ">
             <div>
-              <h1 className="text-2xl font-bold">{invoiceData.companyDetails.name}</h1>
-              <p className="text-sm">GSTIN: {invoiceData.companyDetails.gstin}</p>
-              <p className="text-sm">State: {invoiceData.companyDetails.state}</p>
+            <h2 className="text-red-500 text-sm sm:text-lg">Nos2 DECARBONISING</h2>
+              <h4 className="text-[10px] sm:text-[12px] text-red-500">
+                BIKE AND CAR - ALL VEHICLE
+              </h4>
+            <img className="w-12 sm:w-16" src={Logoo} alt="Logo" />
+            </div>
+            <div className="text-center">
+           
+              <div className="  space-y-1">
+                <div className="flex items-center space-x-2 sm:space-x-4">
+                  <FaInstagram className="text-pink-600 text-sm sm:text-xl" />
+                  <span className="text-gray-700 text-[10px] sm:text-[12px] font-semibold">
+                    nos2kannur_enginedecarbonising
+                  </span>
+                </div>
+                <div className="flex items-center ">
+                  <CgWebsite className="text-blue-600 text-sm sm:text-xl" />
+                  <span className="text-gray-700 text-[10px] sm:text-[12px] font-semibold">
+                    www.Nos2Decarbanising.com
+                  </span>
+                </div>
+                <div className="flex items-center space-x-2 sm:space-x-4">
+                  <FaWhatsapp className="text-green-600 text-sm sm:text-xl" />
+                  <span className="text-gray-700 text-[10px] sm:text-[12px] font-semibold">
+                    7025715250
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="text-right">
-            <h2 className="text-2xl font-bold">Tax Invoice</h2>
+
+          {/* Owner and Vehicle Details */}
+          <div className="flex flex-wrap justify-between   mb-1">
+            <div>
+              <p className="text-[10px] sm:text-[13px]">Owner Name: Muhammed Ajmal</p>
+              <p className="text-[10px] sm:text-[13px]">Phone: 7025715250</p>
+              <p className="text-[10px] sm:text-[13px]">Vehicle Number: KL 13 AQ 1596</p>
+            </div>
+            <div className="text-right">
+              <p className="text-[10px] sm:text-[13px]">Date: 31/12/2024</p>
+              <p className="text-[10px] sm:text-[13px]">Time: 11:30</p>
+              <p className="text-[10px] sm:text-[13px]">Invoice No: 12dsd442</p>
+            </div>
+          </div>
+
+          {/* Vehicle Info Section */}
+          <div className="flex flex-wrap justify-between ">
+            <div className="w-full sm:w-36">
+              <p className="flex justify-between text-[10px] sm:text-[13px]">
+                Year <span className="font-bold">2012</span>
+              </p>
+              <p className="flex justify-between text-[10px] sm:text-[13px]">
+                Vehicle Model <span className="font-bold">Bike</span>
+              </p>
+              <p className="flex justify-between text-[10px] sm:text-[13px]">
+                Kilometer <span className="font-bold">120000</span>
+              </p>
+              <p className="flex justify-between text-[10px] sm:text-[13px]">
+                Fuel <span className="font-bold">Petrol</span>
+              </p>
+              <p className="flex justify-between text-[10px] sm:text-[13px]">
+                Smoke <span className="font-bold">Normal</span>
+              </p>
+              <p className="flex justify-between text-[10px] sm:text-[13px]">
+                LHCE Used <span className="font-bold">60 ml</span>
+              </p>
+            </div>
+            <img className="w-16 sm:w-24 sm:mt-0" src={Pic1} alt="Vehicle" />
+          </div>
+
+          {/* Table Section */}
+          <div className="overflow-x-auto">
+            <table className="w-full  mt-1 border-collapse">
+              <thead>
+                <tr className="bg-gray-100">
+                  <th className="border p-1 sm:p-2">Si-No</th>
+                  <th className="border p-1 sm:p-2 text-right">Details</th>
+                  <th className="border p-1 sm:p-2 text-right">Qty</th>
+                  <th className="border p-1 sm:p-2 text-right">Each</th>
+                  <th className="border p-1 sm:p-2 text-right">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="border p-1 sm:p-2">1</td>
+                  <td className="border p-1 sm:p-2 text-right">Engine</td>
+                  <td className="border p-1 sm:p-2 text-right">1</td>
+                  <td className="border p-1 sm:p-2 text-right">1,500.00</td>
+                  <td className="border p-1 sm:p-2 text-right">$1,500.00</td>
+                </tr>
+                <tr>
+                  <td colSpan="4" className="border p-1 sm:p-2 text-right">
+                    Total Amount
+                  </td>
+                  <td className="border p-1 sm:p-2 text-right font-bold">$1,500.00</td>
+                </tr>
+                <tr>
+                  <td colSpan="4" className="border p-1 sm:p-2 text-right">
+                    Discount
+                  </td>
+                  <td className="border p-1 sm:p-2 text-right font-bold">-$120.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          {/* Terms Section */}
+          <div className="p-4">
+            <h2 className="font-bold text-[12px] sm:text-[14px]">TERMS</h2>
+            <ol className="text-[10px] sm:text-[12px] list-decimal ml-4">
+              <li>Your Next Service is After 12 Months or 140,000 km</li>
+              <li>Decarbonize your vehicle once a year to keep the engine healthy</li>
+              <li>
+                If you have queries or complaints regarding our service, feel
+                free to contact our technical team
+              </li>
+            </ol>
           </div>
         </div>
-      </div>
 
-      {/* Customer Details */}
-      {/* (same layout as before for customer and vehicle details) */}
-
-      {/* Items Table */}
-      {/* (same layout as before for items) */}
-
-      {/* Footer */}
-      {/* (same layout as before for footer) */}
-
-      {/* Download Button */}
-      <div className="text-center mt-8">
-        <button
-          onClick={downloadPDF}
-          className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
-        >
-          Download as PDF
-        </button>
+        {/* PDF Download Button */}
+        <div className="mt-6 flex justify-center">
+          <button
+            onClick={handleDownloadPdf}
+            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300"
+          >
+            Download PDF
+          </button>
+        </div>
       </div>
     </div>
   );
-};
-
-export default InvoiceTemplate;
+}

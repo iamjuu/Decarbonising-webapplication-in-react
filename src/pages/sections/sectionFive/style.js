@@ -38,6 +38,7 @@ export  const Wrapper = styled.div`
 
 export  const Label = styled.label`
   display: block;
+  font-weight: 500;
   margin-bottom: 0.5rem;
   font-size: .9rem;
   color: #4b5563;
@@ -124,6 +125,10 @@ export  const SvgIcon = styled.svg`
 `;
 export const InputContainer = styled.div`
 display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+/* background-color: red; */
 gap: 10px;
 justify-content: space-between;
 width: 70%;

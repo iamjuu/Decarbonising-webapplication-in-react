@@ -1,35 +1,46 @@
 import React, { useState } from 'react';
-import {Button,Container,InputField,InputWrapper,Label,SvgIcon,Text,Wrapper,InputContainer} from './style'
-import {useNavigate} from 'react-router-dom'
+import { Button, Container, InputField, InputWrapper, Label, SvgIcon, Text, Wrapper, InputContainer } from './style';
+import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
-  const Navigate = useNavigate()
-  const [vehicleNumber, setVehicleNumber] = useState('');
+  const Navigate = useNavigate();
+  const [formData, setFormData] = useState({ vehicleNumber: '', phone: '' });
 
   const handleInputChange = (event) => {
-    setVehicleNumber(event.target.value);
+    const { name, value } = event.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   const handleSearch = () => {
-
-    console.log('Searching for vehicle number:', vehicleNumber);
-    Navigate('/vehicle-datails')
-    
+    console.log('Searching for vehicle number:', formData.vehicleNumber);
+    console.log('Phone number:', formData.phone);
+    Navigate('/vehicle-details');
   };
 
   return (
     <Container>
       <Text>
-      <p>If your vehicle is registered on this site, you can search for it here. If found, you can view your vehicle bill. Otherwise, you can register your slot.</p>
+        <p>If your vehicle is registered on this site, you can search for it here. If found, you can view your vehicle bill. Otherwise, you can register your slot.</p>
       </Text>
       <Wrapper>
-        <Label>Search by vehicle number</Label>
+        <Label>ENTER REGISTER NUMBER AND VEHICLE NUMBER</Label>
         <InputWrapper>
-          <InputContainer >
+          <InputContainer>
             <InputField
               type="text"
-              placeholder="Search by vehicle Number"
-              value={vehicleNumber}
+              placeholder="Phone Number"
+              name="phone"
+              value={formData.phone}
+              onChange={handleInputChange}
+            />
+            <InputField
+              type="text"
+              placeholder="Vehicle Number"
+              name="vehicleNumber"
+              value={formData.vehicleNumber}
               onChange={handleInputChange}
             />
             <Button type="button" onClick={handleSearch}>
