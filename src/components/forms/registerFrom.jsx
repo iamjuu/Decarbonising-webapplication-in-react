@@ -3,12 +3,10 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Axios from "../../Instance/Instance";
 import Swal from "sweetalert2";
-
-// Move handleSubmit inside the component to access props and state if needed
+import { useNavigate } from "react-router-dom";
 const register = () => {
+  const Navigate = useNavigate()
   const [previewImage, setPreviewImage] = useState(null);
-
-  // Validation schema
   const validationSchema = Yup.object({
     full_name: Yup.string().required("Full Name is required"),
     phone: Yup.string().required("Phone number is required")
@@ -55,8 +53,9 @@ const register = () => {
           text: "Pickup request submitted successfully!",
           icon: "success",
           confirmButtonText: "OK",
-        });
+        })
       }
+      Navigate('/')
     } catch (error) {
       console.error("Error submitting form:", error);
       Swal.fire({
