@@ -1,73 +1,75 @@
 import React, { useState, useEffect } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import Axios from "../../Instance/Instance"; // Assuming Axios instance for backend communication
+import Axios from "../../Instance/Instance";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+const register = () => {
+  const Navigate = useNavigate()
+  const [previewImage, setPreviewImage] = useState(null);
+  const validationSchema = Yup.object({
+    full_name: Yup.string().required("Full Name is required"),
+    phone: Yup.string().required("Phone number is required")
+      .matches(/^\d+$/, "Phone number must only contain digits"),
+    vehicleModel: Yup.string().required("Vehicle name is required"),
+    place: Yup.string().required("Place is required"),
+    vehiclenumber: Yup.string().required("Vehicle Number is required"),
+    vehicleyear: Yup.string().required("Vehicle Year is required"),
+    kilometer: Yup.string().required("Vehicle kilometer is required"),
+    time: Yup.string().required("Time is required"),
+    pickupImage: Yup.mixed().required("Image is required"),
+  });
 
-// Validation schema using Yup
-const validationSchema = Yup.object({
-  full_name: Yup.string().required("Full Name is required"),
-  phone: Yup.number().required("Phone number is required"),
-  place: Yup.string().required("Place is required"),
-  vehiclenumber: Yup.string().required("Vehicle Number is required"),
-  time: Yup.string().required("Time is required"),
-  pickupImage: Yup.mixed().required("Image is required"),
-});
+  const initialValues = {
+    full_name: "",
+    phone: "",
+    vehicleModel: "",
+    place: "",
+    vehiclenumber: "",
+    vehicleyear: "",
+    kilometer: "",
+    time: "",
+    pickupImage: null,
+  };
 
-// Initial form values
-const initialValues = {
-  full_name: "",
-  phone: "",
-  place: "",
-  vehiclenumber: "",
-  vehicleyear:"",
-  time: "",
-  pickupImage: null,
-};
+  const handleSubmit = async (values, { resetForm, setSubmitting }) => {
+    try {
+      const formData = new FormData();
+      Object.keys(values).forEach(key => {
+        formData.append(key, values[key]);
+      });
 
-// Submit handler
-const handleSubmit = async (values, { resetForm, setSubmitting }) => {
-  try {
-    const formData = new FormData();
-    formData.append("full_name", values.full_name);
-    formData.append("phone", values.phone);
-    formData.append("place", values.place);
-    formData.append("vehiclenumber", values.vehiclenumber);
-    formData.append("vehicleyear",values.vehicleyear)
-    formData.append("time", values.time);
-    formData.append("pickupImage", values.pickupImage);
+      const response = await Axios.post("/register", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
-    const response = await Axios.post("/register", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-
-    if (response.status === 200) {
-      resetForm();
+      if (response.status === 200) {
+        resetForm();
+        setPreviewImage(null); // Clear the preview image
+        Swal.fire({
+          title: "Success",
+          text: "Pickup request submitted successfully!",
+          icon: "success",
+          confirmButtonText: "OK",
+        })
+      }
+      Navigate('/')
+    } catch (error) {
+      console.error("Error submitting form:", error);
       Swal.fire({
-        title: "Success",
-        text: "Pickup request submitted successfully!",
-        icon: "success",
+        title: "Error",
+        text: error.response?.data?.message || 
+          "Failed to submit the pickup request. Please try again later.",
+        icon: "error",
         confirmButtonText: "OK",
       });
+    } finally {
+      setSubmitting(false);
     }
-  } catch (error) {
-    console.error("Error submitting form:", error);
-    Swal.fire({
-      title: "Error",
-      text: "Failed to submit the pickup request. Please try again later.",
-      icon: "error",
-      confirmButtonText: "OK",
-    });
-  }
-  setSubmitting(false); // Ensure the submitting state is set back to false after submission
-};
+  };
 
-const Pickup = () => {
-  const [previewImage, setPreviewImage] = useState(null);
-
-  // Clean up image preview on component unmount
   useEffect(() => {
     return () => {
       if (previewImage) {
@@ -76,11 +78,12 @@ const Pickup = () => {
     };
   }, [previewImage]);
 
-  // Handle image change and set the field value
   const handleImageChange = (event, setFieldValue) => {
     const file = event.currentTarget.files[0];
-    setFieldValue("pickupImage", file);
-    setPreviewImage(URL.createObjectURL(file));
+    if (file) {
+      setFieldValue("pickupImage", file);
+      setPreviewImage(URL.createObjectURL(file));
+    }
   };
 
   return (
@@ -89,7 +92,7 @@ const Pickup = () => {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={(values, actions) => handleSubmit(values, actions)}
+          onSubmit={handleSubmit}
         >
           {({ setFieldValue, isSubmitting }) => (
             <Form>
@@ -98,7 +101,6 @@ const Pickup = () => {
                   <div className="text-gray-600">
                     <p className="font-medium text-lg">Personal Details</p>
                   </div>
-
                   <div className="lg:col-span-2">
                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                       <div className="md:col-span-5">
@@ -119,7 +121,7 @@ const Pickup = () => {
                       <div className="md:col-span-5">
                         <label htmlFor="phone">Phone number</label>
                         <Field
-                          type="number"
+                          type="tel"
                           name="phone"
                           id="phone"
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
@@ -131,7 +133,6 @@ const Pickup = () => {
                           className="text-red-500"
                         />
                       </div>
-
                       <div className="md:col-span-2">
                         <label htmlFor="place">Place</label>
                         <Field
@@ -146,6 +147,20 @@ const Pickup = () => {
                           className="text-red-500"
                         />
                       </div>
+                      <div className="md:col-span-2">
+                        <label htmlFor="vehicleModel">Vehicle Model</label>
+                        <Field
+                          type="text"
+                          name="vehicleModel"
+                          id="vehicleModel"
+                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                        />
+                        <ErrorMessage
+                          name="vehicleModel"
+                          component="div"
+                          className="text-red-500"
+                        />
+                      </div>
 
                       <div className="md:col-span-2">
                         <label htmlFor="vehiclenumber">Vehicle Number</label>
@@ -155,7 +170,6 @@ const Pickup = () => {
                           id="vehiclenumber"
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           style={{ textTransform: "uppercase" }}
-                          onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
                         />
                         <ErrorMessage
                           name="vehiclenumber"
@@ -170,11 +184,23 @@ const Pickup = () => {
                           name="vehicleyear"
                           id="vehicleyear"
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          style={{ textTransform: "uppercase" }}
-                          onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
                         />
                         <ErrorMessage
                           name="vehicleyear"
+                          component="div"
+                          className="text-red-500"
+                        />
+                      </div>
+                      <div className="md:col-span-2">
+                        <label htmlFor="kilometer">Kilometer</label>
+                        <Field
+                          type="text"
+                          name="kilometer"
+                          id="kilometer"
+                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                        />
+                        <ErrorMessage
+                          name="kilometer"
                           component="div"
                           className="text-red-500"
                         />
@@ -203,7 +229,7 @@ const Pickup = () => {
                           type="file"
                           name="pickupImage"
                           id="pickupImage"
-                          accept="image/*;capture=camera"
+                          accept="image/*"
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           onChange={(event) => handleImageChange(event, setFieldValue)}
                         />
@@ -218,7 +244,7 @@ const Pickup = () => {
                 </div>
 
                 {/* Preview Image */}
-                <div className="mt-4  flex justify-center">
+                <div className="mt-4 flex justify-center">
                   {previewImage && (
                     <img
                       src={previewImage}
@@ -233,7 +259,7 @@ const Pickup = () => {
                   className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 mt-4"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? "Submitting" : "Submit"}
+                  {isSubmitting ? "Submitting..." : "Submit"}
                 </button>
               </div>
             </Form>
@@ -244,4 +270,4 @@ const Pickup = () => {
   );
 };
 
-export default Pickup;
+export default register;
