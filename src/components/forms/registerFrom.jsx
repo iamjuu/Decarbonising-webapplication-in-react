@@ -4,19 +4,21 @@ import * as Yup from "yup";
 import Axios from "../../Instance/Instance";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+
 const register = () => {
-  const Navigate = useNavigate()
+  const Navigate = useNavigate();
   const [previewImage, setPreviewImage] = useState(null);
+
   const validationSchema = Yup.object({
     full_name: Yup.string().required("Full Name is required"),
     phone: Yup.string().required("Phone number is required")
       .matches(/^\d+$/, "Phone number must only contain digits"),
     vehicleModel: Yup.string().required("Vehicle name is required"),
     place: Yup.string().required("Place is required"),
-    vehiclenumber: Yup.string().required("Vehicle Number is required"),
+    vehiclenumber: Yup.string().required("Vehicle Number is required")
+      .matches(/^[A-Z0-9]+$/, "Vehicle Number must only contain uppercase letters and numbers"),
     vehicleyear: Yup.string().required("Vehicle Year is required"),
     kilometer: Yup.string().required("Vehicle kilometer is required"),
-    time: Yup.string().required("Time is required"),
     pickupImage: Yup.mixed().required("Image is required"),
   });
 
@@ -28,7 +30,6 @@ const register = () => {
     vehiclenumber: "",
     vehicleyear: "",
     kilometer: "",
-    time: "",
     pickupImage: null,
   };
 
@@ -53,14 +54,14 @@ const register = () => {
           text: "Pickup request submitted successfully!",
           icon: "success",
           confirmButtonText: "OK",
-        })
+        });
       }
-      Navigate('/')
+      Navigate('/');
     } catch (error) {
       console.error("Error submitting form:", error);
       Swal.fire({
         title: "Error",
-        text: error.response?.data?.message || 
+        text: error.response?.data?.message ||
           "Failed to submit the pickup request. Please try again later.",
         icon: "error",
         confirmButtonText: "OK",
@@ -84,6 +85,12 @@ const register = () => {
       setFieldValue("pickupImage", file);
       setPreviewImage(URL.createObjectURL(file));
     }
+  };
+
+  // Handle vehicle number change (convert to uppercase and strip non-alphanumeric characters)
+  const handleVehicleNumberChange = (event, setFieldValue) => {
+    const value = event.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+    setFieldValue("vehiclenumber", value);
   };
 
   return (
@@ -170,6 +177,7 @@ const register = () => {
                           id="vehiclenumber"
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           style={{ textTransform: "uppercase" }}
+                          onChange={(e) => handleVehicleNumberChange(e, setFieldValue)}
                         />
                         <ErrorMessage
                           name="vehiclenumber"
@@ -201,23 +209,6 @@ const register = () => {
                         />
                         <ErrorMessage
                           name="kilometer"
-                          component="div"
-                          className="text-red-500"
-                        />
-                      </div>
-
-                      <div className="md:col-span-2">
-                        <label htmlFor="time">Time</label>
-                        <Field
-                          type="time"
-                          name="time"
-                          id="time"
-                          min="12:00"
-                          max="19:00"
-                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                        />
-                        <ErrorMessage
-                          name="time"
                           component="div"
                           className="text-red-500"
                         />

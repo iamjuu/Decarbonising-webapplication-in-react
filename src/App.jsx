@@ -13,7 +13,7 @@ function App() {
     <Router>
       <Suspense fallback={<Loader />}>
         <Routes>
-        console.log("Sggf")
+        
           <Route path="/" element={<Sections />} />
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/vehicle-details" element={<DetailsPage />} />
