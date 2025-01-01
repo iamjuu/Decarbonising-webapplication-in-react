@@ -8,10 +8,12 @@ import Contact from './pages/contact'
 import About from './pages/about'
 import DetailsPage from './pages/detailsPage'
 function App() {
+
   return (
     <Router>
       <Suspense fallback={<Loader />}>
         <Routes>
+        
           <Route path="/" element={<Sections />} />
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/vehicle-details" element={<DetailsPage />} />
