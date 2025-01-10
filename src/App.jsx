@@ -7,6 +7,7 @@ const RegisterForm = lazy(() => import('./components/forms/registerFrom'));
 import Contact from './pages/contact'
 import About from './pages/about'
 import DetailsPage from './pages/detailsPage'
+import Booking from "./pages/Booking"
 function App() {
 
   return (
@@ -15,10 +16,13 @@ function App() {
         <Routes>
         
           <Route path="/" element={<Sections />} />
-          <Route path="/register" element={<RegisterForm />} />
+          <Route path="/register" element={<Booking />} />
+          {/* <Route path="/register2" element={} /> */}
+    
           <Route path="/vehicle-details" element={<DetailsPage />} />
           <Route path='/contact' element={<Contact/>}/>
           <Route path='/about' element={<About/>}/>
+
 
         </Routes>
       </Suspense>
