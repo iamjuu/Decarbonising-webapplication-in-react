@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useRef} from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import DatePicker from "react-datepicker";
@@ -6,12 +6,13 @@ import { Calendar, Clock, MapPin, Camera, Car, Phone, User } from "lucide-react"
 import "react-datepicker/dist/react-datepicker.css";
 import videoFile from "./../assets/video/videoplayback.mp4";
 import axios from "axios";
+import Swal from "sweetalert2";  // Import SweetAlert2
 
 const BookingPage = () => {
   const [view, setView] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
-
+  const videoRef = useRef(null);
   const validationSchema = Yup.object({
     full_name: Yup.string().required("Full Name is required"),
     phone: Yup.string()
@@ -29,6 +30,22 @@ const BookingPage = () => {
       appointmentDate: Yup.date().required("Appointment date is required")
     })
   });
+
+  useEffect(() => {
+    // Pause video when the view is not null (form is being shown)
+    if (view) {
+      console.log("useffect worked")
+      if (videoRef.current) {
+        videoRef.current.pause();
+      }
+    }else{
+      if (videoRef.current) {
+        videoRef.current.play();
+      }
+
+
+    }
+  }, [view]);
 
   const initialValues = {
     full_name: "",
@@ -48,13 +65,14 @@ const BookingPage = () => {
       Object.keys(values).forEach((key) => {
         formData.append(key, values[key]);
       });
-let booking =false
+
+      let booking = false;
 
       if (view === "bookLater" && selectedDate) {
         formData.append("appointmentDate", selectedDate);
-        booking =true
+        booking = true;
       }
-      formData.append("booking",booking.toString())
+      formData.append("booking", booking.toString());
 
       const response = await axios.post("http://localhost:7000/register", formData, {
         headers: {
@@ -62,24 +80,30 @@ let booking =false
         },
       });
 
-      if (response.ok) {
+      if (response.status === 200) {  // Check if the response is successful
         resetForm();
         setPreviewImage(null);
         setSelectedDate(null);
-        alert("Booking submitted successfully!");
+        Swal.fire({
+          icon: 'success',
+          title: 'Booking Submitted',
+          text: 'Your booking has been submitted successfully!',
+        });
         setView(null);
       } else {
-        throw new Error("Failed to submit booking");
+        throw new Error(response.data.message || "Failed to submit booking");
       }
     } catch (error) {
-      console.log(error)
       console.error("Error submitting form:", error);
-      alert("Failed to submit booking. Please try again.");
+      Swal.fire({
+        icon: 'error',
+        title: 'Booking Error',
+        text: error.response?.data?.message || 'Failed to submit booking. Please try again.',
+      });
     } finally {
       setSubmitting(false);
     }
   };
-
 
   const formatVehicleNumber = (value) => {
     if (!value) return "";
@@ -88,7 +112,7 @@ let booking =false
       .replace(/[^A-Z0-9]/g, "") // Remove all non-alphanumeric characters
       .trim(); // Trim whitespace
   };
-  
+
   const handleImageChange = (event, setFieldValue) => {
     const file = event.currentTarget.files[0];
     if (file) {
@@ -176,18 +200,17 @@ let booking =false
                       placeholder="Model"
                       className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2 mt-1 focus:border-red-500 focus:ring-1 focus:ring-red-500"
                     />
-<Field
-  type="text"
-  name="vehiclenumber"
-  placeholder="Vehicle Number"
-  className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2 mt-1 focus:border-red-500 focus:ring-1 focus:ring-red-500"
-  onChange={(e) => {
-    const formattedValue = formatVehicleNumber(e.target.value);
-    setFieldValue("vehiclenumber", formattedValue);
-  }}
-/>
-<ErrorMessage name="vehiclenumber" component="div" className="text-red-500 text-sm mt-1" />
-
+                    <Field
+                      type="text"
+                      name="vehiclenumber"
+                      placeholder="Vehicle Number"
+                      className="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-2 mt-1 focus:border-red-500 focus:ring-1 focus:ring-red-500"
+                      onChange={(e) => {
+                        const formattedValue = formatVehicleNumber(e.target.value);
+                        setFieldValue("vehiclenumber", formattedValue);
+                      }}
+                    />
+                    <ErrorMessage name="vehiclenumber" component="div" className="text-red-500 text-sm mt-1" />
                   </div>
                   <ErrorMessage name="vehicleModel" component="div" className="text-red-500 text-sm mt-1" />
                   <ErrorMessage name="vehiclenumber" component="div" className="text-red-500 text-sm mt-1" />
@@ -281,6 +304,7 @@ let booking =false
       <div className="fixed top-0 left-0 w-full h-full -z-10">
         <div className="absolute inset-0 bg-black/20 z-10" /> {/* Overlay */}
         <video
+        ref={videoRef} 
           autoPlay
           loop
           muted
@@ -288,7 +312,6 @@ let booking =false
           className="absolute top-0 left-0 min-w-full min-h-full w-auto h-auto object-cover"
         >
           <source src={videoFile} type="video/mp4" />
-          {/* <source src="/videos/car-service.webm" type="video/webm" /> */}
           Your browser does not support the video tag.
         </video>
       </div>
