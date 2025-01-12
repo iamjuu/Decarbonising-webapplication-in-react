@@ -9,6 +9,8 @@ import About from './pages/about'
 import DetailsPage from './pages/detailsPage'
 import Booking from "./pages/Booking"
 import Home from "./pages/homepage"
+import Vehiclesearch from "./pages/searchform"
+import PDF from "./pages/detailsPage/pdf"
 function App() {
 
   return (
@@ -18,9 +20,11 @@ function App() {
         
           <Route path="/" element={<Sections />} />
           <Route path="/register" element={<Booking />} />
-          {/* <Route path="/register2" element={} /> */}
+          <Route path="/vehicle-details" element={<DetailsPage/>} />
     <Route path ="/home" element ={<Home/>}/>
-          <Route path="/vehicle-details" element={<DetailsPage />} />
+    <Route path ="/pdf" element ={<PDF/>}/>
+
+          <Route path="/billsearch" element={<Vehiclesearch  />} />
           <Route path='/contact' element={<Contact/>}/>
           <Route path='/about' element={<About/>}/>
 
