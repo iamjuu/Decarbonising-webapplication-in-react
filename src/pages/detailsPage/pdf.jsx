@@ -26,7 +26,7 @@ const Invoice = () => {
 
     try {
       const canvas = await html2canvas(element, {
-        scale: 4, // Increased for better quality
+        scale: 4,
         useCORS: true,
         logging: false,
         allowTaint: true,
@@ -36,7 +36,7 @@ const Invoice = () => {
         windowHeight: element.scrollHeight,
       });
 
-      const imgWidth = 210; // A4 width in mm
+      const imgWidth = 210;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
       
       const pdf = new jsPDF({
@@ -86,26 +86,21 @@ const Invoice = () => {
                 )}
               </div>
               
-              <div className="text-sm space-y-2">
-  <div className="flex items-center gap-2 text-gray-600">
-    <div className="w-6 flex justify-center">
-      <FaInstagram className="text-pink-600 w-4 h-4" />
-    </div>
-    <span className="leading-6">{companyInfoData.instagram}</span>
-  </div>
-  <div className="flex items-center gap-2 text-gray-600">
-    <div className="w-6 flex justify-center">
-      <CgWebsite className="text-blue-600 w-4 h-4" />
-    </div>
-    <span className="leading-6">{companyInfoData.website}</span>
-  </div>
-  <div className="flex items-center gap-2 text-gray-600">
-    <div className="w-6 flex justify-center">
-      <FaWhatsapp className="text-green-600 w-4 h-4" />
-    </div>
-    <span className="leading-6">{companyInfoData.whatsapp}</span>
-  </div>
-</div>
+              {/* Fixed contact info alignment */}
+              <div className="text-sm">
+                <div className="grid grid-cols-[24px,1fr] gap-2 items-center mb-2">
+                  <FaInstagram className="text-pink-600 w-4 h-4 justify-self-center" />
+                  <span className="text-gray-600">{companyInfoData.instagram}</span>
+                </div>
+                <div className="grid grid-cols-[24px,1fr] gap-2 items-center mb-2">
+                  <CgWebsite className="text-blue-600 w-4 h-4 justify-self-center" />
+                  <span className="text-gray-600">{companyInfoData.website}</span>
+                </div>
+                <div className="grid grid-cols-[24px,1fr] gap-2 items-center">
+                  <FaWhatsapp className="text-green-600 w-4 h-4 justify-self-center" />
+                  <span className="text-gray-600">{companyInfoData.whatsapp}</span>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -136,26 +131,26 @@ const Invoice = () => {
             <div>
               <h2 className="text-lg font-semibold mb-3 text-gray-800">Invoice Details</h2>
               <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
+                <div className="grid grid-cols-[120px,1fr] items-center">
                   <span className="text-gray-600">Date:</span>
-                  <span className="font-medium">{new Date().toLocaleDateString()}</span>
+                  <span className="font-medium justify-self-end">{new Date().toLocaleDateString()}</span>
                 </div>
-                <div className="flex justify-between items-center">
-  <span className="text-gray-600">Status:</span>
-  <div className="flex items-center">
-    <span className="bg-green-600 text-white px-3 leading-6 h-6 flex items-center rounded-full text-xs">
-      {invoiceData.servicestatus}
-    </span>
-  </div>
-</div>
-                <div className="flex justify-between">
+                {/* Fixed status alignment */}
+                <div className="grid grid-cols-[120px,1fr] items-center">
+                  <span className="text-gray-600">Status:</span> 
+                  <span className="text-green-600 font-bold   px-3 py-1 rounded-full text-[18px] justify-self-end inline-block items-center">
+                    {invoiceData.servicestatus}
+                  </span>
+                </div>
+                <div className="grid grid-cols-[120px,1fr] items-center">
                   <span className="text-gray-600">Invoice No:</span>
-                  <span className="font-medium">{invoiceData._id}</span>
+                  <span className="font-medium justify-self-end">{invoiceData._id}</span>
                 </div>
               </div>
             </div>
           </div>
 
+          {/* Rest of the component remains the same... */}
           {/* Vehicle Details */}
           <div className="mb-8">
             <h2 className="text-lg font-semibold mb-3 text-gray-800">Vehicle Information</h2>
@@ -231,20 +226,20 @@ const Invoice = () => {
 
           {/* Terms and Conditions */}
           <div className="mb-8">
-  <h2 className="text-lg font-semibold mb-3 text-red-600">Terms and Conditions</h2>
-  <div className="text-sm text-gray-600">
-    {[
-      "Your Next Service is After 12 Months or 140,000 km",
-      "Decarbonize your vehicle once a year to keep the engine healthy",
-      "If you have queries or complaints regarding our service, feel free to contact our technical team"
-    ].map((term, index) => (
-      <div key={index} className="flex items-start gap-2 mb-2">
-        <span className="flex-shrink-0 w-6 text-right">{index + 1}.</span>
-        <span className="flex-grow">{term}</span>
-      </div>
-    ))}
-  </div>
-</div>
+            <h2 className="text-lg font-semibold mb-3 text-red-600">Terms and Conditions</h2>
+            <div className="text-sm text-gray-600">
+              {[
+                "Your Next Service is After 12 Months or 140,000 km",
+                "Decarbonize your vehicle once a year to keep the engine healthy",
+                "If you have queries or complaints regarding our service, feel free to contact our technical team"
+              ].map((term, index) => (
+                <div key={index} className="flex items-start gap-2 mb-2">
+                  <span className="flex-shrink-0 w-6 text-right">{index + 1}.</span>
+                  <span className="flex-grow">{term}</span>
+                </div>
+              ))}
+            </div>
+          </div>
 
           {/* Footer with QR Code */}
           <div className="absolute bottom-8 left-8 right-8 flex justify-between items-end">
