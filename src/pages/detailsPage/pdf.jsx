@@ -4,20 +4,21 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { CgWebsite } from "react-icons/cg";
+import QRCode from "react-qr-code";
 
 const Invoice = () => {
   const { state } = useLocation();
   const { invoiceData } = state || {};
   const printRef = useRef(null);
   const companyInfoData = {
-  name: "NSo2 DECARBONISING",
-  subTitle: "BIKE AND CAR - ALL VEHICLE",
-  instagram: "nos2kannur_enginedecarbonising",
-  website: "www.Nos2Decarbanising.com",
-  whatsapp: "7025715250",
-  logo: "",
-  vehicleImage: "",
-};
+    name: "NSo2 DECARBONISING",
+    subTitle: "BIKE AND CAR - ALL VEHICLE",
+    instagram: "nos2kannur_enginedecarbonising",
+    website: "www.Nos2Decarbanising.com",
+    whatsapp: "7025715250",
+    logo: "",
+    vehicleImage: "",
+  };
 
   const handleDownloadPdf = async () => {
     const element = printRef.current;
@@ -25,20 +26,27 @@ const Invoice = () => {
 
     try {
       const canvas = await html2canvas(element, {
-        scale: 2,
+        scale: 4,
         useCORS: true,
         logging: false,
         allowTaint: true,
+        scrollX: 0,
+        scrollY: -window.scrollY,
+        windowWidth: element.scrollWidth,
+        windowHeight: element.scrollHeight,
       });
 
+      const imgWidth = 210;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      
       const pdf = new jsPDF({
         orientation: "portrait",
         unit: "mm",
         format: "a4",
       });
 
-      const imgData = canvas.toDataURL("image/png");
-      pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
+      const imgData = canvas.toDataURL("image/jpeg", 1.0);
+      pdf.addImage(imgData, "JPEG", 0, 0, imgWidth, imgHeight, "", "FAST");
       pdf.save(`Invoice-${invoiceData?._id || "default"}.pdf`);
     } catch (error) {
       console.error("PDF generation failed:", error);
@@ -52,137 +60,206 @@ const Invoice = () => {
   return (
     <div className="min-h-screen bg-gray-100 py-8 px-4">
       <div className="max-w-[21cm] mx-auto bg-white shadow-lg">
-        <div ref={printRef} className="p-8" style={{ minHeight: '29.7cm' }}>
+        <div 
+          ref={printRef} 
+          className="p-8 relative" 
+          style={{ 
+            minHeight: '29.7cm',
+            width: '21cm',
+            margin: '0 auto',
+            backgroundColor: 'white',
+            boxSizing: 'border-box'
+          }}
+        >
           {/* Header */}
-          <div className="border-b-2 border-red-600 pb-4">
+          <div className="border-b-2 border-red-600 pb-6 mb-6">
             <div className="flex justify-between items-start">
-              <div>
-                <h1 className="text-xl font-bold text-red-600">Nos2 DECARBONISING</h1>
-                <p className="text-sm text-gray-600">BIKE AND CAR - ALL VEHICLE</p>
+              <div className="flex-1">
+                <h1 className="text-2xl font-bold text-red-600 mb-1">{companyInfoData.name}</h1>
+                <p className="text-sm text-gray-600 mb-2">{companyInfoData.subTitle}</p>
                 {invoiceData.companyInfo?.logo && (
                   <img 
-                    className="w-16 mt-2" 
+                    className="w-24 h-auto object-contain" 
                     src={`http://localhost:7000/public/images/${invoiceData.companyInfo.logo}`}
                     alt="Logo" 
                   />
                 )}
               </div>
               
-              <div className="text-sm space-y-1">
-                <div className="flex items-center gap-2 text-gray-600">
-                  <FaInstagram className="text-pink-600" />
-                  <span>{companyInfoData.instagram}</span>
+              {/* Fixed contact info alignment */}
+              <div className="text-sm">
+                <div className="grid grid-cols-[24px,1fr] gap-2 items-center mb-2">
+                  <FaInstagram className="text-pink-600 w-4 h-4 justify-self-center" />
+                  <span className="text-gray-600">{companyInfoData.instagram}</span>
                 </div>
-                <div className="flex items-center gap-2 text-gray-600">
-                  <CgWebsite className="text-black-600" />
-                  <span>{companyInfoData.website}</span>
+                <div className="grid grid-cols-[24px,1fr] gap-2 items-center mb-2">
+                  <CgWebsite className="text-blue-600 w-4 h-4 justify-self-center" />
+                  <span className="text-gray-600">{companyInfoData.website}</span>
                 </div>
-                <div className="flex items-center gap-2 text-gray-600">
-                  <FaWhatsapp className="text-green-600" />
-                  <span>{companyInfoData.whatsapp}</span>
+                <div className="grid grid-cols-[24px,1fr] gap-2 items-center">
+                  <FaWhatsapp className="text-green-600 w-4 h-4 justify-self-center" />
+                  <span className="text-gray-600">{companyInfoData.whatsapp}</span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Invoice Info */}
-          <div className="mt-6 grid grid-cols-2 gap-4 text-sm">
+          <div className="grid grid-cols-2 gap-8 mb-6">
             <div>
-              <h2 className="font-semibold mb-2 text-black">Customer Details</h2>
-              <div className="space-y-1 text-gray-600">
-                <p><span className="inline-block w-24">Owner Name:</span> {invoiceData.ownerName}</p>
-                <p><span className="inline-block w-24">Phone:</span> {invoiceData.phoneNumber}</p>
-                <p><span className="inline-block w-24">Vehicle No:</span> {invoiceData.vehicleNumber}</p>
-                <p><span className="inline-block w-24">Model:</span> {invoiceData.vehicleModel}</p>
+              <h2 className="text-lg font-semibold mb-3 text-gray-800">Customer Details</h2>
+              <div className="space-y-2 text-sm">
+                <div className="grid grid-cols-[120px,1fr]">
+                  <span className="text-gray-600">Owner Name:</span>
+                  <span className="font-medium">{invoiceData.ownerName}</span>
+                </div>
+                <div className="grid grid-cols-[120px,1fr]">
+                  <span className="text-gray-600">Phone:</span>
+                  <span className="font-medium">{invoiceData.phoneNumber}</span>
+                </div>
+                <div className="grid grid-cols-[120px,1fr]">
+                  <span className="text-gray-600">Vehicle No:</span>
+                  <span className="font-medium">{invoiceData.vehicleNumber}</span>
+                </div>
+                <div className="grid grid-cols-[120px,1fr]">
+                  <span className="text-gray-600">Model:</span>
+                  <span className="font-medium">{invoiceData.vehicleModel}</span>
+                </div>
               </div>
             </div>
-            <div className="text-right">
-              <h2 className="font-semibold mb-2 text-black">Invoice Details</h2>
-              <div className="space-y-1 text-gray-600">
-                <p>Date: {new Date().toLocaleDateString()}</p>
-                <p className="text-white">
-  Status: <span className="bg-green-800 bg-cover px-2 rounded">{invoiceData.servicestatus}</span>
-</p>
-                <p>Invoice No: {invoiceData._id}</p>
+
+            <div>
+              <h2 className="text-lg font-semibold mb-3 text-gray-800">Invoice Details</h2>
+              <div className="space-y-2 text-sm">
+                <div className="grid grid-cols-[120px,1fr] items-center">
+                  <span className="text-gray-600">Date:</span>
+                  <span className="font-medium justify-self-end">{new Date().toLocaleDateString()}</span>
+                </div>
+                {/* Fixed status alignment */}
+                <div className="grid grid-cols-[120px,1fr] items-center">
+                  <span className="text-gray-600">Status:</span> 
+                  <span className="text-green-600 font-bold   px-3 py-1 rounded-full text-[18px] justify-self-end inline-block items-center">
+                    {invoiceData.servicestatus}
+                  </span>
+                </div>
+                <div className="grid grid-cols-[120px,1fr] items-center">
+                  <span className="text-gray-600">Invoice No:</span>
+                  <span className="font-medium justify-self-end">{invoiceData._id}</span>
+                </div>
               </div>
             </div>
           </div>
 
+          {/* Rest of the component remains the same... */}
           {/* Vehicle Details */}
-          <div className="mt-6">
-            <h2 className="font-semibold mb-2 text-black">Vehicle Information</h2>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="text-sm space-y-1 text-gray-600">
-                <p><span className="inline-block w-24">Year:</span> {invoiceData.vehicleYear}</p>
-                <p><span className="inline-block w-24">Kilometer:</span> {invoiceData.kilometer}</p>
-                <p><span className="inline-block w-24">Fuel Type:</span> {invoiceData.fuelType}</p>
-                <p><span className="inline-block w-24">Smoke:</span> {invoiceData.smoke}</p>
-                <p><span className="inline-block w-24">LHCE Details:</span> {invoiceData.lhceDetails}</p>
+          <div className="mb-8">
+            <h2 className="text-lg font-semibold mb-3 text-gray-800">Vehicle Information</h2>
+            <div className="grid grid-cols-2 gap-8">
+              <div className="space-y-2 text-sm">
+                <div className="grid grid-cols-[120px,1fr]">
+                  <span className="text-gray-600">Year:</span>
+                  <span className="font-medium">{invoiceData.vehicleYear}</span>
+                </div>
+                <div className="grid grid-cols-[120px,1fr]">
+                  <span className="text-gray-600">Kilometer:</span>
+                  <span className="font-medium">{invoiceData.kilometer}</span>
+                </div>
+                <div className="grid grid-cols-[120px,1fr]">
+                  <span className="text-gray-600">Fuel Type:</span>
+                  <span className="font-medium">{invoiceData.fuelType}</span>
+                </div>
+                <div className="grid grid-cols-[120px,1fr]">
+                  <span className="text-gray-600">Smoke:</span>
+                  <span className="font-medium">{invoiceData.smoke}</span>
+                </div>
+                <div className="grid grid-cols-[120px,1fr]">
+                  <span className="text-gray-600">LHCE Details:</span>
+                  <span className="font-medium">{invoiceData.lhceDetails}</span>
+                </div>
               </div>
               {invoiceData.imagelink && (
                 <div className="flex justify-end">
                   <img 
-                    className="w-24 object-contain" 
+                    className="w-32 h-32 object-contain" 
                     src={`http://localhost:7000/public/images/${invoiceData.imagelink}`}
                     alt="Vehicle" 
                   />
-                  
                 </div>
               )}
             </div>
           </div>
 
           {/* Services Table */}
-          <div className="mt-6">
-            <h2 className="font-semibold mb-2 text-red-600">Services</h2>
-            <table className="w-full text-sm">
+          <div className="mb-8">
+            <h2 className="text-lg font-semibold mb-3 text-red-600">Services</h2>
+            <table className="w-full">
               <thead>
-                <tr className="bg-gray-50">
-                  <th className="py-2 px-3 text-left border-b text-gray-600">Service Type</th>
-                  <th className="py-2 px-3 text-right border-b text-gray-600">Amount</th>
+                <tr>
+                  <th className="py-3 px-4 bg-gray-50 text-left text-sm font-semibold text-gray-600 border-y">Service Type</th>
+                  <th className="py-3 px-4 bg-gray-50 text-right text-sm font-semibold text-gray-600 border-y">Amount</th>
                 </tr>
               </thead>
               <tbody>
                 {invoiceData.services.map((service, index) => (
                   <tr key={index} className="border-b">
-                    <td className="py-2 px-3 text-gray-600">{service.serviceType}</td>
-                    <td className="py-2 px-3 text-right text-gray-600">${service.serviceAmount.toFixed(2)}</td>
+                    <td className="py-3 px-4 text-sm text-gray-600">{service.serviceType}</td>
+                    <td className="py-3 px-4 text-sm text-gray-600 text-right">₹{service.serviceAmount.toFixed(2)}</td>
                   </tr>
                 ))}
               </tbody>
               <tfoot>
                 <tr className="border-b">
-                  <td className="py-2 px-3 text-right font-semibold">Total Amount:</td>
-                  <td className="py-2 px-3 text-right text-gray-600">${invoiceData.totalAmount.toFixed(2)}</td>
+                  <td className="py-3 px-4 text-right font-semibold">Total Amount:</td>
+                  <td className="py-3 px-4 text-right text-gray-600">₹{invoiceData.totalAmount.toFixed(2)}</td>
                 </tr>
                 <tr className="border-b">
-                  <td className="py-2 px-3 text-right font-semibold">Discount:</td>
-                  <td className="py-2 px-3 text-right ">-${invoiceData.discount.toFixed(2)}</td>
+                  <td className="py-3 px-4 text-right font-semibold">Discount:</td>
+                  <td className="py-3 px-4 text-right text-red-600">-₹{invoiceData.discount.toFixed(2)}</td>
                 </tr>
                 <tr>
-                  <td className="py-2 px-3 text-right font-semibold">Net Amount:</td>
-                  <td className="py-2 px-3 text-right font-bold">${(invoiceData.totalAmount - invoiceData.discount).toFixed(2)}</td>
+                  <td className="py-3 px-4 text-right font-semibold">Net Amount:</td>
+                  <td className="py-3 px-4 text-right font-bold text-gray-800">₹{(invoiceData.totalAmount - invoiceData.discount).toFixed(2)}</td>
                 </tr>
               </tfoot>
             </table>
           </div>
 
-          {/* Terms */}
-          <div className="mt-8">
-            <h2 className="font-semibold mb-2 text-red-600">Terms and Conditions</h2>
-            <ol className="text-sm list-decimal ml-4 space-y-1 text-gray-600">
-              <li>Your Next Service is After 12 Months or 140,000 km</li>
-              <li>Decarbonize your vehicle once a year to keep the engine healthy</li>
-              <li>If you have queries or complaints regarding our service, feel free to contact our technical team</li>
-            </ol>
+          {/* Terms and Conditions */}
+          <div className="mb-8">
+            <h2 className="text-lg font-semibold mb-3 text-red-600">Terms and Conditions</h2>
+            <div className="text-sm text-gray-600">
+              {[
+                "Your Next Service is After 12 Months or 140,000 km",
+                "Decarbonize your vehicle once a year to keep the engine healthy",
+                "If you have queries or complaints regarding our service, feel free to contact our technical team"
+              ].map((term, index) => (
+                <div key={index} className="flex items-start gap-2 mb-2">
+                  <span className="flex-shrink-0 w-6 text-right">{index + 1}.</span>
+                  <span className="flex-grow">{term}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Footer with QR Code */}
+          <div className="absolute bottom-8 left-8 right-8 flex justify-between items-end">
+            <QRCode 
+              value={companyInfoData.website} 
+              size={96}
+              style={{ height: 'auto', maxWidth: '96px', width: '100%' }}
+            />
+            <div className="text-xs text-gray-500 text-right">
+              <p>Thank you for your business!</p>
+              <p>{companyInfoData.name}</p>
+            </div>
           </div>
         </div>
 
         {/* Download Button */}
-        <div className="p-4 bg-gray-50 flex justify-center">
+        <div className="p-6 bg-gray-50 flex justify-center">
           <button
             onClick={handleDownloadPdf}
-            className="bg-blue-600 text-white px-6 py-2 text-sm rounded hover:bg-red-700 transition duration-300"
+            className="bg-red-600 text-white px-8 py-3 rounded-lg hover:bg-red-700 transition duration-300 font-semibold"
           >
             Download Invoice
           </button>

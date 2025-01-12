@@ -85,7 +85,7 @@ const App = () => {
             <div className='flex gap-5'>
               <button 
                 onClick={handleBookNow}
-                className="bg-red-600 px-6 py-2 rounded-full hover:bg-red-700 transition-colors text-white"
+                className= " bg-red-600 px-6 py-2 rounded-full hover:bg-red-700 transition-colors text-white"
               >
                 Book Now
               </button>
@@ -373,7 +373,7 @@ const App = () => {
       </div>
     </div>
   );
-};
+};  
 
 export default App;
 

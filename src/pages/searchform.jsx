@@ -1,7 +1,7 @@
-import React, { useState, useEffect, } from "react";
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import VIDEO_URL from "./../assets/video/videoplayback.mp4";
-import axios from "./../Instance/Instance"
+import axios from "./../Instance/Instance";
 
 const VehicleSearch = () => {
   const [vehicleNo, setVehicleNo] = useState("");
@@ -10,7 +10,9 @@ const VehicleSearch = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
-const navigate =useNavigate()
+  const [searchAttempted, setSearchAttempted] = useState(false);
+  const navigate = useNavigate();
+
   useEffect(() => {
     const video = document.getElementById("backgroundVideo");
     if (video) {
@@ -26,7 +28,10 @@ const navigate =useNavigate()
       setVehicleNo(value);
       setError((prev) => ({ ...prev, vehicle: "" }));
     } else {
-      setError((prev) => ({ ...prev, vehicle: "Only letters and numbers allowed" }));
+      setError((prev) => ({
+        ...prev,
+        vehicle: "Only letters and numbers allowed",
+      }));
     }
   };
 
@@ -36,7 +41,10 @@ const navigate =useNavigate()
       setMobileNo(value);
       setError((prev) => ({
         ...prev,
-        mobile: value.length !== 10 && value.length ? "Mobile number must be 10 digits" : "",
+        mobile:
+          value.length !== 10 && value.length
+            ? "Mobile number must be 10 digits"
+            : "",
       }));
     }
   };
@@ -44,35 +52,40 @@ const navigate =useNavigate()
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-  
+    setSearchAttempted(true);
+
     try {
-      const response = await axios.post('/findbills', { 
-        vehicleNo,mobileNo
+      const response = await axios.post("/findbills", {
+        vehicleNo,
+        mobileNo,
       });
-  
+      console.log("API Response:", response.data); // Debug log
       setSearchResults(response.data);
     } catch (error) {
-      console.error('Error fetching bills:', error.message);
+      console.error("Error fetching bills:", error);
       setSearchResults([]);
     } finally {
       setIsLoading(false);
     }
   };
+
   const handleClear = () => {
     setVehicleNo("");
     setMobileNo("");
     setSearchResults([]);
     setError({ vehicle: "", mobile: "" });
+    setSearchAttempted(false);
   };
 
   const handleViewDetails = (invoiceData) => {
     navigate("/pdf", { state: { invoiceData } });
   };
+
   return (
-    <div className="min-h-screen relative bg-black">
+    <div className="min-h-screen relative bg-black overflow-x-hidden">
       {/* Video Background */}
       <div className="fixed top-0 left-0 w-full h-full overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-black/40  z-10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-black/40 z-10" />
         <video
           id="backgroundVideo"
           autoPlay
@@ -89,119 +102,152 @@ const navigate =useNavigate()
       </div>
 
       {/* Main Content */}
-      <div className="relative z-20 container mx-auto px-4 py-8">
-        <div
-          className={`flex flex-col md:flex-row items-center ${
-            searchResults.length > 0 ? "justify-start" : "justify-center"
-          } space-y-8 md:space-y-0 md:space-x-8 transition-all duration-500`}
-        >
-          {/* Form */}
-          <div
-            className={`w-full md:w-1/3 bg-black/40 backdrop-blur-sm p-8 rounded-xl border-2 border-red-100 shadow-2xl ${
-              searchResults.length > 0 ? "md:h-auto" : "h-[450px]"
-            } transition-all duration-500`}
-          >
-            <h1 className="text-4xl font-bold text-white mb-8 text-center drop-shadow-lg">
-              Search Previous Bills
-            </h1>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="vehicleNo" className="block text-lg font-medium text-white mb-2">
-                  Vehicle Number
-                </label>
-                <input
-                  type="text"
-                  id="vehicleNo"
-                  value={vehicleNo}
-                  onChange={handleVehicleInput}
-                  className="w-full px-4 py-3 rounded-lg bg-white/90 text-black border-2 border-red-600 focus:ring-2 focus:ring-red-500 focus:border-red-500 placeholder-gray-500"
-                  placeholder="Enter vehicle number"
-                  required
-                />
-                {error.vehicle && <p className="mt-1 text-sm text-red-400 font-semibold">{error.vehicle}</p>}
-              </div>
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex flex-col gap-8">
+          {/* Form Section */}
+          <div className="w-full">
+            <div className="bg-black/40 backdrop-blur-sm p-4 sm:p-6 md:p-8 rounded-xl border-2 border-red-100 shadow-2xl">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-6 text-center drop-shadow-lg">
+                Search Previous Bills
+              </h1>
+              
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                <div>
+                  <label
+                    htmlFor="vehicleNo"
+                    className="block text-base sm:text-lg font-medium text-white mb-2"
+                  >
+                    Vehicle Number
+                  </label>
+                  <input
+                    type="text"
+                    id="vehicleNo"
+                    value={vehicleNo}
+                    onChange={handleVehicleInput}
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-white/90 text-black border-2 border-red-600 focus:ring-2 focus:ring-red-500 focus:border-red-500 placeholder-gray-500 text-sm sm:text-base"
+                    placeholder="Enter vehicle number"
+                    required
+                  />
+                  {error.vehicle && (
+                    <p className="mt-1 text-xs sm:text-sm text-red-400 font-semibold">
+                      {error.vehicle}
+                    </p>
+                  )}
+                </div>
 
-              <div>
-                <label htmlFor="mobileNo" className="block text-lg font-medium text-white mb-2">
-                  Mobile Number
-                </label>
-                <input
-                  type="tel"
-                  id="mobileNo"
-                  value={mobileNo}
-                  onChange={handleMobileInput}
-                  className="w-full px-4 py-3 rounded-lg bg-white/90 text-black border-2 border-red-600 focus:ring-2 focus:ring-red-500 focus:border-red-500 placeholder-gray-500"
-                  placeholder="Enter 10-digit mobile number"
-                  required
-                />
-                {error.mobile && <p className="mt-1 text-sm text-red-400 font-semibold">{error.mobile}</p>}
-              </div>
+                <div>
+                  <label
+                    htmlFor="mobileNo"
+                    className="block text-base sm:text-lg font-medium text-white mb-2"
+                  >
+                    Mobile Number
+                  </label>
+                  <input
+                    type="tel"
+                    id="mobileNo"
+                    value={mobileNo}
+                    onChange={handleMobileInput}
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-white/90 text-black border-2 border-red-600 focus:ring-2 focus:ring-red-500 focus:border-red-500 placeholder-gray-500 text-sm sm:text-base"
+                    placeholder="Enter 10-digit mobile number"
+                    required
+                  />
+                  {error.mobile && (
+                    <p className="mt-1 text-xs sm:text-sm text-red-400 font-semibold">
+                      {error.mobile}
+                    </p>
+                  )}
+                </div>
 
-              <div className="flex justify-between items-center">
-                <button
-                  type="submit"
-                  disabled={!!error.mobile || !!error.vehicle || !vehicleNo || mobileNo.length !== 10 || isLoading}
-                  className="bg-gradient-to-r from-red-700 to-red-900 text-white py-4 px-6 rounded-lg hover:from-red-800 hover:to-red-950 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-bold text-lg shadow-lg"
-                >
-                  {isLoading ? "Searching..." : "Search Bills"}
-                </button>
-                <button
-                  type="button"
-                  onClick={handleClear}
-                  className="bg-gray-600 text-white py-4 px-6 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 transition-all duration-300 font-bold text-lg shadow-lg"
-                >
-                  Clear
-                </button>
-              </div>
-            </form>
+                <div className="flex flex-col sm:flex-row gap-4 pt-2">
+                  <button
+                    type="submit"
+                    disabled={
+                      !!error.mobile ||
+                      !!error.vehicle ||
+                      !vehicleNo ||
+                      mobileNo.length !== 10 ||
+                      isLoading
+                    }
+                    className="flex-1 bg-gradient-to-r from-red-700 to-red-900 text-white py-3 px-4 rounded-lg hover:from-red-800 hover:to-red-950 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-bold text-sm sm:text-base shadow-lg"
+                  >
+                    {isLoading ? "Searching..." : "Search Bills"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleClear}
+                    className="flex-1 bg-gray-600 text-white py-3 px-4 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 transition-all duration-300 font-bold text-sm sm:text-base shadow-lg"
+                  >
+                    Clear
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
 
-          {/* Results */}
-          {searchResults.length > 0 && (
-            <div className="w-full md:w-2/3 space-y-4">
-              <h2 className="text-3xl font-bold text-white mb-6 text-center drop-shadow-lg">
-                Previous Bills
-              </h2>
-              {searchResults.map((bill) => (
-                <div
-                  key={bill.id}
-                  className="bg-black/80 backdrop-blur-sm border-2 border-red-600 rounded-lg p-4 hover:border-white transition-all duration-300 shadow-md transform hover:-translate-y-1 text-sm"
-                >
-                  <div className="flex justify-between items-center">
-                    <div className="space-y-2">
-                      <p className="text-white">Vehicle: {bill.vehicleNumber}</p>
-                      <p className="text-gray-300">
-  Date: {new Date(bill.createdAt).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  })}
-</p>
-                      <p className="text-white font-bold">Amount: ₹{bill.totalAmount}</p>
-                      
+          {/* Results Section */}
+          <div className="w-full mt-8">
+            {isLoading && (
+              <div className="text-white text-center">Loading...</div>
+            )}
+            
+            {searchAttempted && !isLoading && searchResults.length === 0 && (
+              <div className="text-white text-center bg-black/40 backdrop-blur-sm p-4 rounded-lg">
+                No bills found for the given details
+              </div>
+            )}
+
+            {searchResults.length > 0 && (
+              <div className="space-y-4">
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-6 text-center lg:text-left drop-shadow-lg">
+                  Previous Bills ({searchResults.length})
+                </h2>
+                <div className="grid gap-4">
+                  {searchResults.map((bill) => (
+                    <div
+                      key={bill.id}
+                      className="bg-black/80 backdrop-blur-sm border-2 border-red-600 rounded-lg p-4 hover:border-white transition-all duration-300 shadow-md"
+                    >
+                      <div className="flex flex-col sm:flex-row justify-between gap-4">
+                        <div className="space-y-2">
+                          <p className="text-white text-sm sm:text-base">
+                            Vehicle: {bill.vehicleNumber}
+                          </p>
+                          <p className="text-gray-300 text-sm">
+                            Date:{" "}
+                            {new Date(bill.createdAt).toLocaleDateString("en-US", {
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            })}
+                          </p>
+                          <p className="text-white font-bold text-sm sm:text-base">
+                            Amount: ₹{bill.totalAmount}
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span
+                            className={`px-3 py-1 rounded-full text-xs sm:text-sm font-bold ${
+                              bill.servicestatus === "Serviced"
+                                ? "bg-green-900/80 text-white border border-green-500"
+                                : "bg-yellow-900/80 text-white border border-yellow-500"
+                            }`}
+                          >
+                            {bill.servicestatus}
+                          </span>
+                          <button
+                            onClick={() => handleViewDetails(bill)}
+                            className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold shadow-md text-xs sm:text-sm"
+                          >
+                            View
+                          </button>
+                        </div>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span
-                        className={`px-4 py-1 rounded-full font-bold ${
-                          bill.servicestatus === "Serviced"
-                            ? "bg-green-900/80 text-white border border-green-500"
-                            : "bg-yellow-900/80 text-white border border-yellow-500"
-                        }`}
-                      >
-                        {bill.servicestatus}
-                      </span>
-                      <button
-                        onClick={() => handleViewDetails(bill)}
-                        className="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold shadow-md text-xs"
-                      >
-                        View
-                      </button>
-                    </div>
-                  </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
