@@ -18,11 +18,11 @@ function App() {
       <Suspense fallback={<Loader />}>
         <Routes>
         
-          <Route path="/" element={<Sections />} />
+          <Route path="/" element={<Home/>} />
           <Route path="/register" element={<Booking />} />
-          <Route path="/vehicle-details" element={<DetailsPage/>} />
-    <Route path ="/home" element ={<Home/>}/>
-    <Route path ="/pdf" element ={<PDF/>}/>
+          <Route path ="/pdf" element ={<PDF/>}/>
+          {/* <Route path="/vehicle-details" element={<DetailsPage/>} />
+    <Route path ="/home" element ={}/> */}
 
           <Route path="/billsearch" element={<Vehiclesearch  />} />
           <Route path='/contact' element={<Contact/>}/>
