@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState,useRef } from 'react';
 import { Phone, Mail, MapPin, Activity, Wrench, ThermometerSun } from 'lucide-react';
 import videoFile from "./../assets/video/videoplayback.mp4";
 import { useNavigate } from 'react-router-dom';
@@ -57,10 +57,14 @@ const App = () => {
     }
   ];
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+
+
   return (
     <div className="min-h-screen relative">
       {/* Video Background */}
-      <video
+      {/* <video
         ref={videoRef}
         className="fixed top-0 left-0 w-full h-full object-cover z-0"
         autoPlay
@@ -69,42 +73,113 @@ const App = () => {
         playsInline
       >
         <source src={videoFile} type="video/mp4" />
-      </video>
+      </video> */}
 
       {/* Main content wrapper */}
       <div className="relative z-10">
         {/* Header */}
         <header className="fixed w-full bg-black/80 backdrop-blur-sm z-50">
-          <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div className="text-2xl font-bold text-red-600">NSO2</div>
-            <div className="hidden md:flex space-x-6 text-white">
-              <a href="#services" className="hover:text-red-600 transition-colors">Services</a>
-              <a href="#about" className="hover:text-red-600 transition-colors">About</a>
-              <a href="#contact" className="hover:text-red-600 transition-colors">Contact</a>
-            </div>
-            <div className='flex gap-5'>
-              <button 
-                onClick={handleBookNow}
-                className= " bg-red-600 px-6 py-2 rounded-full hover:bg-red-700 transition-colors text-white"
-              >
-                Book Now
-              </button>
-              <button 
-                onClick={handleBillNow}
-                className="bg-red-600 px-6 py-2 rounded-full hover:bg-red-700 transition-colors text-white"
-              >
-                Search Your previous visit
-              </button>
-            </div>
-          </nav>
-        </header>
+    
+      <nav className="container mx-auto p-2 flex justify-between items-center">
+        {/* Logo */}
+        <div className="text-2xl font-bold text-red-600">NSO2</div>
+
+        {/* Desktop Menu */}
+        <div className="hidden md:flex space-x-6 text-white">
+          <a href="#services" className="hover:text-red-600 transition-colors">
+            Services
+          </a>
+          <a href="#about" className="hover:text-red-600 transition-colors">
+            About
+          </a>
+          <a href="#contact" className="hover:text-red-600 transition-colors">
+            Contact
+          </a>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden text-white text-2xl focus:outline-none"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          &#9776;
+        </button>
+
+        {/* Buttons */}
+        <div className="hidden md:flex gap-5">
+          <button
+            onClick={handleBookNow}
+            className="border border-red-700 px-5 rounded-full hover:bg-red-700 text-sm transition-colors text-white"
+          >
+            Book Now
+          </button>
+          <button
+            onClick={handleBillNow}
+            className="bg-red-600 p-3 rounded-full transition-colors text-white hover:bg-transparent hover:border hover:border-red-600"
+          >
+            Search Your previous visit
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="md:hidden bg-black/80 text-white space-y-4 p-4 absolute w-full top-full left-0 z-40">
+          <a
+            href="#services"
+            className="block hover:text-red-600 transition-colors"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Services
+          </a>
+          <a
+            href="#about"
+            className="block hover:text-red-600 transition-colors"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            About
+          </a>
+          <a
+            href="#contact"
+            className="block hover:text-red-600 transition-colors"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Contact
+          </a>
+          <div className="space-y-2">
+            <button
+              onClick={handleBookNow}
+              className="block w-full border border-red-700 px-5 py-2 rounded-full hover:bg-red-700 text-sm transition-colors text-white"
+            >
+              Book Now
+            </button>
+            <button
+              onClick={handleBillNow}
+              className="block w-full bg-red-600 px-5 py-2 rounded-full transition-colors text-white hover:bg-transparent hover:border hover:border-red-600"
+            >
+              Search Your previous visit
+            </button>
+          </div>
+        </div>
+      )}
+    </header>
 
         {/* Rest of the content remains unchanged */}
         {/* Main Content */}
         <main className="text-white">
         {/* Hero Section */}
         <section className="min-h-screen flex items-center bg-black/60">
-          <div className="container mx-auto px-4">
+          <div   className="container  mx-auto px-4">
+          <video
+        ref={videoRef}
+        className="  top-0 left-0 w-full h-full object-cover -z-1"
+        autoPlay
+        loop
+        muted
+        playsInline
+      >
+        <source src={videoFile} type="video/mp4" />
+      </video>
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
               Drive <span className="text-red-600">Clean</span>,<br />
               Drive <span className="text-red-600">Green</span>
