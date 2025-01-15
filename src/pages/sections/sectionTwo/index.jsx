@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Container,
   Description,
@@ -9,9 +9,8 @@ import {
   ReadMoreButton,
   Title,
 } from "./style";
-import {Dodge,Dodgepic} from '../../../assets'
+import { Dodge } from '../../../assets';
 
-// Data array for dynamic rendering
 const sectionData = [
   {
     id: 1,
@@ -27,20 +26,32 @@ const sectionData = [
 ];
 
 const SectionTwo = () => {
+
+  useEffect(() => {
+    import('aos').then(AOS => {
+      AOS.init({
+          duration: 1000, // Animation duration in milliseconds
+          once: false, // Allow animations to trigger on both scroll down and up
+          mirror: true, // Enable animations to reset when scrolling back up
+        });
+    });
+  }, []);
+
   return (
     <>
       {sectionData.map((section) => (
-        <Container key={section.id}>
-           <ImageContainer>
-            <Image src={section.image} alt={section.altText} />
-          </ImageContainer>
-          <Header>
-            <HeaderText>{section.headerText}</HeaderText>
-            <Title>{section.title}</Title>
-            <Description>{section.description}</Description>
-            <ReadMoreButton>{section.buttonText}</ReadMoreButton>
-          </Header>
-         
+        <Container key={section.id} data-aos="fade-up">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <ImageContainer data-aos="fade-right">
+              <Image src={section.image} alt={section.altText} />
+            </ImageContainer>
+            <Header data-aos="fade-left">
+              <HeaderText>{section.headerText}</HeaderText>
+              <Title>{section.title}</Title>
+              <Description>{section.description}</Description>
+              <ReadMoreButton>{section.buttonText}</ReadMoreButton>
+            </Header>
+          </div>
         </Container>
       ))}
     </>
