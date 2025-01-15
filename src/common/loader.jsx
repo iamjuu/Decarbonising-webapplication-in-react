@@ -33,7 +33,6 @@ const LoadingSpinner = () => {
             loop
           >
             <source src={Loader} type="video/mp4" />
-            {/* Fallback animation */}
             <div className="w-32 h-32 border-8 border-gray-300 border-t-blue-600 rounded-full animate-spin" />
           </video>
         </div>
@@ -58,7 +57,7 @@ const LoadingSpinner = () => {
       {/* Optional loading text */}
       <div className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 text-center">
         <p className="text-xxl font-semibold text-gray-700 animate-pulse">
-          Nos2 Kannur...
+          Nos2 Kannur..
         </p>
       </div>
     </div>
