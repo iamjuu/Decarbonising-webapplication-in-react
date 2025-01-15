@@ -57,7 +57,7 @@ const LoadingSpinner = () => {
       {/* Optional loading text */}
       <div className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 text-center">
         <p className="text-xxl font-semibold text-gray-700 animate-pulse">
-          Nos2 Kannur..
+          Nos2 kannur..
         </p>
       </div>
     </div>
