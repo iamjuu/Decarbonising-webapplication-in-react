@@ -2,7 +2,7 @@ import React from 'react'
 import {Logoo} from '../../assets'
 const index = () => {
   return (
-    <footer className="bg-[#F5F5F5]">
+    <footer className="bg-black">
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
       <div className="lg:flex lg:items-start lg:gap-8">
         <div className="text-teal-600">
@@ -12,7 +12,7 @@ const index = () => {
         <div className="mt-8 grid grid-cols-2 gap-8 lg:mt-0 lg:grid-cols-5 lg:gap-y-16">
           <div className="col-span-2">
             <div>
-              <h2 className="text-2xl font-bold text-gray-900">Nos 2</h2>
+              <h2 className="text-2xl font-bold text-gray-400">Nos 2</h2>
   
               <p className="mt-4 text-gray-500">
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse non cupiditate quae nam
@@ -45,99 +45,99 @@ const index = () => {
           </div>
   
           <div className="col-span-2 sm:col-span-1">
-            <p className="font-medium text-gray-900">Services</p>
+            <p className="font-medium text-gray-400">Services</p>
   
             <ul className="mt-6 space-y-4 text-sm">
               <li>
-                <a href="#" className="text-gray-700 transition hover:opacity-75"> 1on1 Coaching </a>
+                <a href="#" className="text-gray-500 transition hover:opacity-75"> 1on1 Coaching </a>
               </li>
   
               <li>
-                <a href="#" className="text-gray-700 transition hover:opacity-75"> Company Review </a>
+                <a href="#" className="text-gray-500 transition hover:opacity-75"> Company Review </a>
               </li>
   
               <li>
-                <a href="#" className="text-gray-700 transition hover:opacity-75"> Accounts Review </a>
+                <a href="#" className="text-gray-500 transition hover:opacity-75"> Accounts Review </a>
               </li>
   
               <li>
-                <a href="#" className="text-gray-700 transition hover:opacity-75"> HR Consulting </a>
+                <a href="#" className="text-gray-500 transition hover:opacity-75"> HR Consulting </a>
               </li>
   
               <li>
-                <a href="#" className="text-gray-700 transition hover:opacity-75"> SEO Optimisation </a>
+                <a href="#" className="text-gray-500 transition hover:opacity-75"> SEO Optimisation </a>
               </li>
             </ul>
           </div>
   
           <div className="col-span-2 sm:col-span-1">
-            <p className="font-medium text-gray-900">Company</p>
+            <p className="font-medium text-gray-400">Company</p>
   
             <ul className="mt-6 space-y-4 text-sm">
               <li>
-                <a href="#" className="text-gray-700 transition hover:opacity-75"> About </a>
+                <a href="#" className="text-gray-500 transition hover:opacity-75"> About </a>
               </li>
   
               <li>
-                <a href="#" className="text-gray-700 transition hover:opacity-75"> Meet the Team </a>
+                <a href="#" className="text-gray-500 transition hover:opacity-75"> Meet the Team </a>
               </li>
   
               <li>
-                <a href="#" className="text-gray-700 transition hover:opacity-75"> Accounts Review </a>
+                <a href="#" className="text-gray-500 transition hover:opacity-75"> Accounts Review </a>
               </li>
             </ul>
           </div>
   
           <div className="col-span-2 sm:col-span-1">
-            <p className="font-medium text-gray-900">Helpful Links</p>
+            <p className="font-medium text-gray-400">Helpful Links</p>
   
             <ul className="mt-6 space-y-4 text-sm">
               <li>
-                <a href="#" className="text-gray-700 transition hover:opacity-75"> Contact </a>
+                <a href="#" className="text-gray-500 transition hover:opacity-75"> Contact </a>
               </li>
   
               <li>
-                <a href="#" className="text-gray-700 transition hover:opacity-75"> FAQs </a>
+                <a href="#" className="text-gray-500 transition hover:opacity-75"> FAQs </a>
               </li>
   
               <li>
-                <a href="#" className="text-gray-700 transition hover:opacity-75"> Live Chat </a>
+                <a href="#" className="text-gray-500 transition hover:opacity-75"> Live Chat </a>
               </li>
             </ul>
           </div>
   
           <div className="col-span-2 sm:col-span-1">
-            <p className="font-medium text-gray-900">Legal</p>
+            <p className="font-medium text-gray-400">Legal</p>
   
             <ul className="mt-6 space-y-4 text-sm">
               <li>
-                <a href="#" className="text-gray-700 transition hover:opacity-75"> Accessibility </a>
+                <a href="#" className="text-gray-500 transition hover:opacity-75"> Accessibility </a>
               </li>
   
               <li>
-                <a href="#" className="text-gray-700 transition hover:opacity-75"> Returns Policy </a>
+                <a href="#" className="text-gray-500 transition hover:opacity-75"> Returns Policy </a>
               </li>
   
               <li>
-                <a href="#" className="text-gray-700 transition hover:opacity-75"> Refund Policy </a>
+                <a href="#" className="text-gray-500 transition hover:opacity-75"> Refund Policy </a>
               </li>
   
               <li>
-                <a href="#" className="text-gray-700 transition hover:opacity-75"> Hiring Statistics </a>
+                <a href="#" className="text-gray-500 transition hover:opacity-75"> Hiring Statistics </a>
               </li>
             </ul>
           </div>
   
           <div className="col-span-2 sm:col-span-1">
-            <p className="font-medium text-gray-900">Downloads</p>
+            <p className="font-medium text-gray-400">Downloads</p>
   
             <ul className="mt-6 space-y-4 text-sm">
               <li>
-                <a href="#" className="text-gray-700 transition hover:opacity-75"> Marketing Calendar </a>
+                <a href="#" className="text-gray-500 transition hover:opacity-75"> Marketing Calendar </a>
               </li>
   
               <li>
-                <a href="#" className="text-gray-700 transition hover:opacity-75"> SEO Infographics </a>
+                <a href="#" className="text-gray-500 transition hover:opacity-75"> SEO Infographics </a>
               </li>
             </ul>
           </div>
@@ -148,7 +148,7 @@ const index = () => {
       href='https://wa.me/7902903243'
       rel="noreferrer"
                 target="_blank"
-                className="text-gray-700 transition hover:opacity-75"
+                className="text-gray-400 transition hover:opacity-75"
               >
                 <span className="sr-only">whatsupp</span>
   
@@ -170,7 +170,7 @@ const index = () => {
                 href="https://www.instagram.com/nos2kannur_enginedecarbonising?igsh=MWllMDZmcXJtM2MyNQ=="
                 rel="noreferrer"
                 target="_blank"
-                className="text-gray-700 transition hover:opacity-75"
+                className="text-gray-400 transition hover:opacity-75"
               >
                 <span className="sr-only">Instagram</span>
   
@@ -189,7 +189,7 @@ const index = () => {
                 href="#"
                 rel="noreferrer"
                 target="_blank"
-                className="text-gray-700 transition hover:opacity-75"
+                className="text-gray-400 transition hover:opacity-75"
               >
                 <span className="sr-only">Facebook</span>
   
@@ -209,7 +209,7 @@ const index = () => {
     href="mailto:nos2kannur.in@gmail.com"
     rel="noreferrer"
     target="_blank"
-    className="text-gray-700 transition hover:opacity-75"
+    className="text-gray-400 transition hover:opacity-75"
   >
     <span className="sr-only">Gmail</span>
 

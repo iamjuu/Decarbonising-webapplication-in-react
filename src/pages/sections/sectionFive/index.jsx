@@ -27,7 +27,7 @@ const Index = () => {
         <p>If your vehicle is registered on this site, you can search for it here. If found, you can view your vehicle bill. Otherwise, you can register your slot.</p>
       </Text>
       <Wrapper>
-        <Label>ENTER REGISTER NUMBER AND VEHICLE NUMBER</Label>
+        <Label>please enter vehicle number to see your vehicle details</Label>
         <InputWrapper>
           <InputContainer>
             <InputField

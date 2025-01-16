@@ -15,10 +15,11 @@ export default index
 
 const Container = styled.div`
   width: 100%;
+  z-index: -10;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: red; */
+  background-color: black;
 `
 const ContainerWrap = styled.div`
 width: 100%;
