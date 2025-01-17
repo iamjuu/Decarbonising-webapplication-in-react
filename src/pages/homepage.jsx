@@ -3,13 +3,16 @@ import AOS from "aos";
 import "aos/dist/aos.css"; // Import AOS styles
 import "animate.css"; // Import Animate.css
 import { Activity, Wrench, ThermometerSun } from "lucide-react";
-import SectionTwo from "./sections/sectionTwo";
-const SectionFour = lazy(()=> import("./sections/sectionFour"))
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
-import SectionSeven from "./sections/sectionSeven";
 import SectionMain from "./sections/sectionMain";
+import SectionTwo from "./sections/sectionTwo";
+const SectionFour = lazy(()=> import("./sections/sectionFour"))
+import SectionSeven from "./sections/sectionSeven";
 import SectionEight from "./sections/sectionEight";
+import SectionNine from "./sections/sectionNine" 
+// import SectionTen from './sections/sectionTen'
+
 import {  Service2 } from "../assets";
 
 const App = () => {
@@ -81,7 +84,7 @@ const App = () => {
         >
           <Navbar />
         </header>
-        <main className="text-white animate__animated animate__fadeIn">
+        <main className="text-white  bg-black animate__animated animate__fadeIn">
           <SectionMain data-aos="fade-in" />
 
           <section
@@ -139,7 +142,7 @@ const App = () => {
                           <li
                             key={idx}
                             className="flex items-start text-sm text-gray-300"
-                            data-aos="fade-left"
+                            data-aos="fade-down"
                           >
                             <span className="text-red-600 mr-2">•</span>
                             {detail}
@@ -154,11 +157,14 @@ const App = () => {
           </section>
 
           {/* Other sections */}
+          <SectionNine/>
+          <SectionTwo data-aos="fade-up" />
+          {/* <SectionEight data-aos="fade-right" /> */}
           <SectionSeven data-aos="fade-up" />
           <SectionFour data-aos="fade-down" />
-          <SectionTwo data-aos="fade-left" />
-          <SectionEight data-aos="fade-right" />
+          {/* <SectionTen/> */}
           <Footer data-aos="fade-down" />
+
         </main>
       </div>
     </div>

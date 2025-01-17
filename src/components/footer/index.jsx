@@ -25,22 +25,7 @@ const index = () => {
             <form className="w-full">
               <label htmlFor="UserEmail" className="sr-only"> Email </label>
   
-              <div
-                className="border border-gray-100 p-2 focus-within:ring sm:flex sm:items-center sm:gap-4"
-              >
-                <input
-                  type="email"
-                  id="UserEmail"
-                  placeholder="john@rhcp.com"
-                  className="w-full border-none p-3 focus:border-transparent focus:ring-transparent sm:text-sm"
-                />
-  
-                <button
-                  className="mt-1 w-full bg-[#ff0000] px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-none hover:bg-teal-600 sm:mt-0 sm:w-auto sm:shrink-0"
-                >
-                  Sign Up
-                </button>
-              </div>
+           
             </form>
           </div>
   
