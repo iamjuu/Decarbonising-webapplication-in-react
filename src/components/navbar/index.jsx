@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Logoo } from '../../assets';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const Index = () => {
   return (
     <nav className="container mx-auto p-2 flex justify-between items-center">
       {/* Logo */}
-      <div className="text-2xl   font-serif  text-red-600">NSO2</div>
+      <div className="text-2xl   font-serif  text-red-600"><img className='w-16' src={Logoo} alt="" /></div>
 
       {/* Desktop Menu */}
       <div className="hidden md:flex space-x-6 text-white">

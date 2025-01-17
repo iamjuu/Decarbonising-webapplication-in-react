@@ -45,7 +45,7 @@ const SectionTwo = () => {
             <ImageContainer data-aos="fade-right">
               <Image src={section.image} alt={section.altText} />
             </ImageContainer>
-            <Header data-aos="fade-left">
+            <Header data-aos="fade-down">
               <HeaderText>{section.headerText}</HeaderText>
               <Title>{section.title}</Title>
               <Description>{section.description}</Description>
