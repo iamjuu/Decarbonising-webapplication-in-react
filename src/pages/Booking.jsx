@@ -36,7 +36,7 @@ const BookingPage = () => {
     if (view) {
       console.log("useffect worked")
       if (videoRef.current) {
-        videoRef.current.pause();
+        videoRef.current.play();
       }
     }else{
       if (videoRef.current) {

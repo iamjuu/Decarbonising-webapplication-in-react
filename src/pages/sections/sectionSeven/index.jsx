@@ -65,7 +65,7 @@ const Index = () => {
 
   return (
     <div>
-      <section className="py-16 bg-black">
+      <section className="py-16  font-Nos2font bg-black">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center" ref={el => counters.current.push(el)} data-aos="fade-up" data-aos-delay="100">
