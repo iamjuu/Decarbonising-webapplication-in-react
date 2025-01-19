@@ -1,9 +1,10 @@
 import React from 'react'
 import {Logoo} from '../../assets'
+import {Link} from 'react-router-dom'
 const index = () => {
   return (
-    <footer className="bg-black">
-    <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+    <footer className="bg-black  font-Nos2font">
+    <div className="mx-auto max-w-screen-xl  font-Nos2font px-4 py-16 sm:px-6 lg:px-8">
       <div className="lg:flex lg:items-start lg:gap-8">
         <div className="text-teal-600">
         <img style={{width:'100px'}} src={Logoo} alt="" />
@@ -12,11 +13,10 @@ const index = () => {
         <div className="mt-8 grid grid-cols-2 gap-8 lg:mt-0 lg:grid-cols-5 lg:gap-y-16">
           <div className="col-span-2">
             <div>
-              <h2 className="text-2xl font-bold text-gray-400">Nos 2</h2>
+              {/* <h2 className="text-2xl font-bold text-gray-400">Nos 2</h2> */}
   
               <p className="mt-4 text-gray-500">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse non cupiditate quae nam
-                molestias.
+              Accelerate to Zero: Go Carbon, Go Clean. Empowering a sustainable future, one engine at a time
               </p>
             </div>
           </div>
@@ -34,24 +34,22 @@ const index = () => {
   
             <ul className="mt-6 space-y-4 text-sm">
               <li>
-                <a href="#" className="text-gray-500 transition hover:opacity-75"> 1on1 Coaching </a>
+                <a href="#" className="text-gray-500 transition hover:opacity-75"> Carbon Capture </a>
               </li>
   
               <li>
-                <a href="#" className="text-gray-500 transition hover:opacity-75"> Company Review </a>
+                <a href="#" className="text-gray-500 transition hover:opacity-75"> Carbon Footprint  </a>
               </li>
   
               <li>
-                <a href="#" className="text-gray-500 transition hover:opacity-75"> Accounts Review </a>
+                <a href="#" className="text-gray-500 transition hover:opacity-75">  Energy Efficiency Optimisation </a>
               </li>
   
               <li>
-                <a href="#" className="text-gray-500 transition hover:opacity-75"> HR Consulting </a>
+                <a href="#" className="text-gray-500 transition hover:opacity-75"> Decarbonisation Stratery </a>
               </li>
   
-              <li>
-                <a href="#" className="text-gray-500 transition hover:opacity-75"> SEO Optimisation </a>
-              </li>
+            
             </ul>
           </div>
   
@@ -60,15 +58,15 @@ const index = () => {
   
             <ul className="mt-6 space-y-4 text-sm">
               <li>
-                <a href="#" className="text-gray-500 transition hover:opacity-75"> About </a>
+                <a href="#" className="text-gray-500 transition hover:opacity-75"> Service </a>
               </li>
   
               <li>
-                <a href="#" className="text-gray-500 transition hover:opacity-75"> Meet the Team </a>
+                <a href="#" className="text-gray-500 transition hover:opacity-75"> Contact </a>
               </li>
   
               <li>
-                <a href="#" className="text-gray-500 transition hover:opacity-75"> Accounts Review </a>
+                <a href="#" className="text-gray-500 transition hover:opacity-75">About</a>
               </li>
             </ul>
           </div>
@@ -85,9 +83,7 @@ const index = () => {
                 <a href="#" className="text-gray-500 transition hover:opacity-75"> FAQs </a>
               </li>
   
-              <li>
-                <a href="#" className="text-gray-500 transition hover:opacity-75"> Live Chat </a>
-              </li>
+            
             </ul>
           </div>
   
@@ -107,9 +103,7 @@ const index = () => {
                 <a href="#" className="text-gray-500 transition hover:opacity-75"> Refund Policy </a>
               </li>
   
-              <li>
-                <a href="#" className="text-gray-500 transition hover:opacity-75"> Hiring Statistics </a>
-              </li>
+             
             </ul>
           </div>
   
@@ -117,13 +111,12 @@ const index = () => {
             <p className="font-medium text-gray-400">Downloads</p>
   
             <ul className="mt-6 space-y-4 text-sm">
+              <Link to='/billsearch'>
               <li>
-                <a href="#" className="text-gray-500 transition hover:opacity-75"> Marketing Calendar </a>
+                <a href="#" className="text-gray-500 transition hover:opacity-75"> Bill download </a>
               </li>
-  
-              <li>
-                <a href="#" className="text-gray-500 transition hover:opacity-75"> SEO Infographics </a>
-              </li>
+              </Link>
+             
             </ul>
           </div>
   

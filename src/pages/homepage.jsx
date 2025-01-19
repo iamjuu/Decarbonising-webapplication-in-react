@@ -74,7 +74,7 @@ const App = () => {
   ];
 
   return (
-    <div className="min-h-screen relative animate__animated animate__fadeIn">
+    <div className="min-h-screen  font-Nos2font relative animate__animated animate__fadeIn">
       {/* Main content wrapper */}
       <div className="relative z-10 animate__animated animate__fadeIn">
         {/* Header */}

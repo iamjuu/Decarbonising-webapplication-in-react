@@ -15,12 +15,15 @@ const Index = () => {
   };
 
   return (
-    <nav className="container mx-auto p-2 flex justify-between items-center">
+    <nav className="container mx-auto p-2 flex justify-between  font-Nos2font items-center">
       {/* Logo */}
       <div className="text-2xl   font-serif  text-red-600"><img className='w-16' src={Logoo} alt="" /></div>
 
       {/* Desktop Menu */}
       <div className="hidden md:flex space-x-6 text-white">
+      <a href="#home" className="hover:text-red-600 transition-colors">
+          Home
+        </a>
         <a href="#services" className="hover:text-red-600 transition-colors">
           Services
         </a>
@@ -50,15 +53,25 @@ const Index = () => {
         </button>
         <button
           onClick={handleBillNow}
-          className="bg-red-600 p-3 rounded-[50px] transition-colors text-white hover:bg-transparent hover:border hover:border-red-600"
+          className="p-3  border border-red-700 rounded-[50px] transition-colors text-white hover:bg-transparent hover:border hover:border-red-600"
         >
-          Search Your Previous Visit
+           Previous Visit
         </button>
       </div>
 
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-black/80 text-white space-y-4 p-4 absolute w-full top-full left-0 z-40">
+          
+          <a
+            href="#home"
+            className="block hover:text-red-600 transition-colors"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Home
+          </a>
+
+
           <a
             href="#services"
             className="block hover:text-red-600 transition-colors"

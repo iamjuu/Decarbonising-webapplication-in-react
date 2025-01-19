@@ -15,9 +15,9 @@ const sectionData = [
   {
     id: 1,
     headerText: "WHO WE ARE",
-    title: "We Have 25 Years Of Experience In This Field",
+    title: "We Have  More Then 5 Years Of Experience In This Field",
     description:
-      "With a rich legacy spanning 25 years, our commitment to excellence in car servicing is unwavering. Our seasoned team brings a wealth of experience to ensure your vehicle receives top-notch care. Trust in our expertise to keep your car running smoothly and safely.",
+      "Nos2  is team of The Vehicle Decarbonisation Center is a team of experts dedicated to helping individuals, fleets, and communities reduce their carbon footprint from transportation. Our mission is to provide innovative solutions and services that support a sustainable and environmentally friendly transportation sector. - Expert consulting services for vehicle emissions reduction and decarbonization strategy development- Innovative solutions for electric vehicle adoption, alternative fuel infrastructure development, and vehicle efficiency optimization",
     buttonText: "Read More",
     image: Dodge,
     altText: "Car service",

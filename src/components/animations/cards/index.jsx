@@ -4,31 +4,31 @@ export function AnimatedTestimonialsDemo({Image}) {
   const testimonials = [
     {
       quote:
-        "The attention to detail and innovative features have completely transformed our workflow. This is exactly what we've been looking for.",
+        "Engine decarbonization involves removing carbon deposits from engine components, such as fuel injectors, intake valves, and combustion chambers. This process improves engine performance, reduces emissions, and prevents engine damage.",
       name: "Muhammed ajmal",
-      designation: "Software developer",
+      designation: "Engine Decarbonization",
       src:Caroseal1
     },
     {
       quote:
-        "Implementation was seamless and the results exceeded our expectations. The platform's flexibility is remarkable.",
+        "Fuel system cleaning removes carbon deposits and contaminants from fuel tanks, fuel lines, and fuel injectors. This process ensures proper fuel flow, reduces emissions, and prevents engine problems.",
       name: "juu",
-      designation: "photoGrapher",
+      designation: "Fuel System Cleaning",
       src:Caroseal2
 
     },
     {
       quote:
-        "This solution has significantly improved our team's productivity. The intuitive interface makes complex tasks simple.",
+        " Catalytic converter cleaning removes carbon deposits and contaminants from catalytic converters, ensuring proper emissions control and reducing the risk of converter failure.",
       name: "athlete",
-      designation: "Operations Director at CloudScale",
+      designation: "Catalytic Converter Cleaning",
       src:caroseal3
     },
     {
       quote:
-        "Outstanding support and robust features. It's rare to find a product that delivers on all its promises.",
+        "Engine oil system cleaning removes carbon deposits and contaminants from engine oil systems, ensuring proper lubrication and reducing wear on engine components.",
       name: "James Kim",
-      designation: "Engineering Lead at DataPro",
+      designation: "Engine Oil System Cleaning",
       src:Caroseal1
     },
 
