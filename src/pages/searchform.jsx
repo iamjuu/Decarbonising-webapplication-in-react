@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import VIDEO_URL from "./../assets/video/videoplayback.mp4";
 import axios from "./../Instance/Instance";
-
 const VehicleSearch = () => {
+
   const [vehicleNo, setVehicleNo] = useState("");
   const [mobileNo, setMobileNo] = useState("");
   const [error, setError] = useState({ vehicle: "", mobile: "" });
@@ -81,6 +81,10 @@ const VehicleSearch = () => {
     navigate("/pdf", { state: { invoiceData } });
   };
 
+const Gobackbtn = ()=>{
+  navigate(-1)
+}
+
   return (
     <div className="min-h-screen relative bg-black overflow-x-hidden">
       {/* Video Background */}
@@ -102,12 +106,16 @@ const VehicleSearch = () => {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="relative z-20 w-[500px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col gap-8">
+          <div className="w-full">
+
+          <button  onClick={Gobackbtn} className=" border px-3  py-1 hover:bg-red-600 duration-75 text-[12px] border-gray-700 rounded-md  text-white">back </button>
+          </div>
           {/* Form Section */}
           <div className="w-full">
-            <div className="bg-black/40 backdrop-blur-sm p-4 sm:p-6 md:p-8 rounded-xl border-2 border-red-100 shadow-2xl">
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-6 text-center drop-shadow-lg">
+            <div className="bg-black/40 shadow-sm backdrop-blur-sm p-4 sm:p-6 md:p-8 rounded-xl border-1 border-red-100 ">
+              <h1 className="text-[24px]  font-[300] text-white mb-6 text-center drop-shadow-lg">
                 Search Previous Bills
               </h1>
               
@@ -115,7 +123,7 @@ const VehicleSearch = () => {
                 <div>
                   <label
                     htmlFor="vehicleNo"
-                    className="block text-base sm:text-lg font-medium text-white mb-2"
+                    className="block text-[14px] font-[400] text-white mb-2"
                   >
                     Vehicle Number
                   </label>
@@ -138,7 +146,7 @@ const VehicleSearch = () => {
                 <div>
                   <label
                     htmlFor="mobileNo"
-                    className="block text-base sm:text-lg font-medium text-white mb-2"
+                    className="block text-[14px] font-[400] text-white mb-2"
                   >
                     Mobile Number
                   </label>
@@ -191,11 +199,11 @@ const VehicleSearch = () => {
             )}
             
             {searchAttempted && !isLoading && searchResults.length === 0 && (
-              <div className="text-white text-center bg-black/40 backdrop-blur-sm p-4 rounded-lg">
+              <div className="text-red-600 text-center bg-black/40 backdrop-blur-sm p-4 rounded-lg">
                 No bills found for the given details
               </div>
             )}
-
+{/* <dojv  d></dojv> */}
             {searchResults.length > 0 && (
               <div className="space-y-4">
                 <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-6 text-center lg:text-left drop-shadow-lg">
@@ -213,7 +221,7 @@ const VehicleSearch = () => {
                             Vehicle: {bill.vehicleNumber}
                           </p>
                           <p className="text-gray-300 text-sm">
-                            Date:{" "}
+                            Date:
                             {new Date(bill.createdAt).toLocaleDateString("en-US", {
                               year: "numeric",
                               month: "long",
