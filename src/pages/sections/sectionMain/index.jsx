@@ -16,7 +16,7 @@ const Index = () => { // Changed component name to uppercase
   }, []);
 
   const handleBookNow = () => {
-    navigate("register");
+    navigate("nos2/register");
   };
 
   const handleBillNow = () => {

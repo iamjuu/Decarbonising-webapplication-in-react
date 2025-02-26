@@ -320,17 +320,17 @@ const BookingPage = () => {
       <div className="relative z-10 min-h-screen py-12 px-4">
         <div className="max-w-4xl mx-auto">
           {!view ? (
-            <div className="text-center  flex flex-col justify-center items-center space-y-8">
+            <div className="text-center space-y-8">
               <div className="space-y-4">
                 <h1 className="text-4xl font-bold text-white">Vehicle Service Booking</h1>
                 <p className="text-gray-300">Choose your preferred booking option below</p>
               </div>
 
-              <div className="flex  gap-6 ">
-                <div className="bg-black/80  w-[250px] backdrop-blur-sm p-6 rounded-lg shadow-lg border border-red-600 hover:border-red-400 transition-colors ">
+              <div className="grid md:grid-cols-2 gap-6 ">
+                <div className="bg-black/80 backdrop-blur-sm p-6 rounded-lg shadow-lg border border-red-600 hover:border-red-400 transition-colors ">
                   <Clock className="w-12 h-12 text-red-500 mx-auto mb-4" />
-                  <h2 className="text-[20px] font-[300] text-white mb-2">Instant Booking</h2>
-                  <p className="text-gray- text-[14px] font-[400]  text-white 300 mb-4">Schedule your vehicle service right now</p>
+                  <h2 className="text-xl font-bold text-white mb-2">Instant Booking</h2>
+                  <p className="text-gray-300 mb-4">Schedule your vehicle service right now</p>
                   <button
                     onClick={() => setView("instantBooking")}
                     className="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition-colors"
@@ -339,10 +339,10 @@ const BookingPage = () => {
                   </button>
                 </div>
 
-                <div className="bg-black/80 backdrop-blur-sm p-6 rounded-lg shadow-lg w-[250px] border border-red-600 hover:border-red-400 transition-colors">
+                <div className="bg-black/80 backdrop-blur-sm p-6 rounded-lg shadow-lg border border-red-600 hover:border-red-400 transition-colors">
                   <Calendar className="w-12 h-12 text-red-500 mx-auto mb-4" />
-                  <h2 className="text-[20px] font-[300] text-white mb-2">Schedule Appointment</h2>
-                  <p className="text-gray-300  text-[14px] font-[400] mb-4">Plan your service for a future date</p>
+                  <h2 className="text-xl font-bold text-white mb-2">Schedule Appointment</h2>
+                  <p className="text-gray-300 mb-4">Plan your service for a future date</p>
                   <button
                     onClick={() => setView("bookLater")}
                     className="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition-colors"
