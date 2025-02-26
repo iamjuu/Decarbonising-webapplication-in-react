@@ -56,7 +56,7 @@ const TestimonialCarousel = () => {
   }, [isHovered]);
 
   return (
-    <section className="py-20 bg-black overflow-hidden">
+    <section className="py-20  opacity-50 bg-black overflow-hidden">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold mb-12 text-center text-white">What Our Clients Say</h2>
         <div 

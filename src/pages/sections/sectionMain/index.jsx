@@ -16,7 +16,7 @@ const Index = () => { // Changed component name to uppercase
   }, []);
 
   const handleBookNow = () => {
-    navigate("/register");
+    navigate("nos2/register");
   };
 
   const handleBillNow = () => {
@@ -46,12 +46,12 @@ const Index = () => { // Changed component name to uppercase
               Drive <span className="text-red-600">Clean</span><br />
           <span className='text-red-600'>Drive</span>     <span className="">Green</span>
             </h1>
-            <p className="text- md:text-lg mb-8 max-w-2xl">
+            <p className="text-[20px] text-gray-500 mb-8 max-w-2xl">
               Leading the revolution in vehicle decarbonization. We help reduce your carbon footprint while maintaining peak performance.
             </p>
             <button
               onClick={handleBookNow}
-              className="bg-red-600 px-8 py-3 rounded-full text-lg hover:bg-red-700 transition-colors"
+              className=" border border-red-600 px-8 py-3 rounded-full text-[14px] hover:bg-red-700 transition-colors"
             >
               Schedule Service
             </button>
