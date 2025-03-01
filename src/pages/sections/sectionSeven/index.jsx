@@ -9,9 +9,9 @@ const sectionData = [
   {
     id: 1,
     headerText: "WHO WE ARE",
-    title: "We Have 25 Years Of Experience In This Field",
+    title: "We Have 5 Years Of Experience In This Field",
     description:
-      "With a rich legacy spanning 25 years, our commitment to excellence in car servicing is unwavering. Our seasoned team brings a wealth of experience to ensure your vehicle receives top-notch care. Trust in our expertise to keep your car running smoothly and safely.",
+      "With a rich legacy spanning 5 years, our commitment to excellence in car servicing is unwavering. Our seasoned team brings a wealth of experience to ensure your vehicle receives top-notch care. Trust in our expertise to keep your car running smoothly and safely.",
     buttonText: "Read More",
     image: Dodge,
     altText: "Car service",
