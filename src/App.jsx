@@ -10,23 +10,27 @@ const Booking = lazy(() => import("./pages/Booking"));
 const Home = lazy(() => import("./pages/homepage"));
 const Vehiclesearch = lazy(() => import("./pages/searchform"));
 const PDF = lazy(() => import("./pages/detailsPage/pdf"));
+const NotFound = lazy(() => import("./pages/Notfound")); 
+
 
 function App() {
   return (
     <Router>
       <Suspense fallback={<Loader />}>
         <Routes>
-          {/* Common route prefix /nos2 */}
-            <Route index element={<Home />} /> {/* Default: /nos2 */}
-          <Route path="/nos2">
-            <Route path="/nos2/register" element={<Booking />} /> {/* /nos2/register */}
-            <Route path="/nos2/pdf" element={<PDF />} /> {/* /nos2/pdf */}
-            <Route path="billsearch" element={<Vehiclesearch />} /> {/* /nos2/billsearch */}
-          </Route>
-        </Routes>
+  <Route index element={<Home />} /> 
+  <Route path="/nos2">
+    <Route path="register" element={<Booking />} />
+    <Route path="pdf" element={<PDF />} /> 
+    <Route path="billsearch" element={<Vehiclesearch />} /> 
+  </Route>
+  <Route path="*" element={<NotFound />} />
+</Routes>
+
       </Suspense>
     </Router>
   );
 }
 
 export default App;
+

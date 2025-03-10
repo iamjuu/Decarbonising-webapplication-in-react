@@ -5,13 +5,12 @@ import jsPDF from "jspdf";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { CgWebsite } from "react-icons/cg";
 import QRCode from "react-qr-code";
-
 const Invoice = () => {
   const { state } = useLocation();
   const { invoiceData } = state || {};
   const printRef = useRef(null);
   const companyInfoData = {
-    name: "NSo2 DECARBONISING",
+    name: "Nos2 DECARBONISING",
     subTitle: "BIKE AND CAR - ALL VEHICLE",
     instagram: "nos2kannur_enginedecarbonising",
     website: "www.Nos2Decarbanising.com",
@@ -19,11 +18,9 @@ const Invoice = () => {
     logo: "",
     vehicleImage: "",
   };
-
   const handleDownloadPdf = async () => {
     const element = printRef.current;
     if (!element) return;
-
     try {
       const canvas = await html2canvas(element, {
         scale: 4,
@@ -35,7 +32,6 @@ const Invoice = () => {
         windowWidth: element.scrollWidth,
         windowHeight: element.scrollHeight,
       });
-
       const imgWidth = 210;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
       
@@ -44,7 +40,6 @@ const Invoice = () => {
         unit: "mm",
         format: "a4",
       });
-
       const imgData = canvas.toDataURL("image/jpeg", 1.0);
       pdf.addImage(imgData, "JPEG", 0, 0, imgWidth, imgHeight, "", "FAST");
       pdf.save(`Invoice-${invoiceData?._id || "default"}.pdf`);
@@ -52,11 +47,9 @@ const Invoice = () => {
       console.error("PDF generation failed:", error);
     }
   };
-
   if (!invoiceData) {
     return <div>Loading...</div>;
   }
-
   return (
     <div className="min-h-screen bg-gray-100 py-8 px-4">
       <div className="max-w-[21cm] mx-auto bg-white shadow-lg">
@@ -103,7 +96,6 @@ const Invoice = () => {
               </div>
             </div>
           </div>
-
           {/* Invoice Info */}
           <div className="grid grid-cols-2 gap-8 mb-6">
             <div>
@@ -127,7 +119,6 @@ const Invoice = () => {
                 </div>
               </div>
             </div>
-
             <div>
               <h2 className="text-lg font-semibold mb-3 text-gray-800">Invoice Details</h2>
               <div className="space-y-2 text-sm">
@@ -149,7 +140,6 @@ const Invoice = () => {
               </div>
             </div>
           </div>
-
           {/* Rest of the component remains the same... */}
           {/* Vehicle Details */}
           <div className="mb-8">
@@ -181,14 +171,13 @@ const Invoice = () => {
                 <div className="flex justify-end">
                   <img 
                     className="w-32 h-32 object-contain" 
-                    src={`http://localhost:7000/public/images/${invoiceData.imagelink}`}
+                    src={`${invoiceData.imagelink}`}
                     alt="Vehicle" 
                   />
                 </div>
               )}
             </div>
           </div>
-
           {/* Services Table */}
           <div className="mb-8">
             <h2 className="text-lg font-semibold mb-3 text-red-600">Services</h2>
@@ -223,7 +212,6 @@ const Invoice = () => {
               </tfoot>
             </table>
           </div>
-
           {/* Terms and Conditions */}
           <div className="mb-8">
             <h2 className="text-lg font-semibold mb-3 text-red-600">Terms and Conditions</h2>
@@ -240,7 +228,6 @@ const Invoice = () => {
               ))}
             </div>
           </div>
-
           {/* Footer with QR Code */}
           <div className="absolute bottom-8 left-8 right-8 flex justify-between items-end">
             <QRCode 
@@ -254,7 +241,6 @@ const Invoice = () => {
             </div>
           </div>
         </div>
-
         {/* Download Button */}
         <div className="p-6 bg-gray-50 flex justify-center">
           <button
@@ -267,6 +253,5 @@ const Invoice = () => {
       </div>
     </div>
   );
-};
-
-export default Invoice;
+}; 
+export default Invoice
