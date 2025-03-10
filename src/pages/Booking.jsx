@@ -74,7 +74,7 @@ const BookingPage = () => {
       }
       formData.append("booking", booking.toString());
 
-      const response = await axios.post("http://localhost:7000/api/register", formData, {
+      const response = await axios.post("http://13.201.189.211/api/register", formData, {
         headers: {
           "Content-Type": "multipart/form-data", // Required for formData
         },
