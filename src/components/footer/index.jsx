@@ -3,7 +3,7 @@ import {Logoo} from '../../assets'
 import {Link} from 'react-router-dom'
 const index = () => {
   return (
-    <footer className="bg-black  font-Nos2font">
+    <footer  id='footer' className="bg-black  font-Nos2font">
     <div className="mx-auto max-w-screen-xl  font-Nos2font px-4 py-16 sm:px-6 lg:px-8">
       <div className="lg:flex lg:items-start lg:gap-8">
         <div className="text-teal-600">

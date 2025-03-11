@@ -40,7 +40,7 @@ const SectionTwo = () => {
   return (
     <>
       {sectionData.map((section) => (
-        <Container key={section.id} data-aos="fade-up">
+        <Container  id="about" key={section.id} data-aos="fade-up">
           <div className="grid grid-cols-1 md:grid-cols-2  font-Nos2font gap-8 items-center">
             <ImageContainer data-aos="fade-right">
               <Image src={section.image} alt={section.altText} />

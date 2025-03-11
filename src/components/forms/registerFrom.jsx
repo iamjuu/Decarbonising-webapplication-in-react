@@ -94,7 +94,7 @@ const register = () => {
   };
 
   return (
-    <div className="p-6 bg-white mt-24 flex items-center justify-center">
+    <div    className="p-6 bg-white mt-24 flex items-center justify-center">
       <div className="container max-w-screen-lg mx-auto">
         <Formik
           initialValues={initialValues}

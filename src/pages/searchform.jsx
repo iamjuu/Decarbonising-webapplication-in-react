@@ -81,9 +81,9 @@ const VehicleSearch = () => {
     navigate("/nos2/pdf", { state: { invoiceData } });
   };
 
-const Gobackbtn = ()=>{
-  navigate(-1)
-}
+  const Gobackbtn = () => {
+    navigate(-1)
+  }
 
   return (
     <div className="min-h-screen relative bg-black overflow-x-hidden">
@@ -106,16 +106,17 @@ const Gobackbtn = ()=>{
       </div>
 
       {/* Main Content */}
-      <div className="relative z-20 w-[500px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="relative z-20 w-full max-w-lg mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col gap-8">
           <div className="w-full">
-
-          <button  onClick={Gobackbtn} className=" border px-3  py-1 hover:bg-red-600 duration-75 text-[12px] border-gray-700 rounded-md  text-white">back </button>
+            <button onClick={Gobackbtn} className="border px-3 py-1 hover:bg-red-600 duration-75 text-xs md:text-sm border-gray-700 rounded-md text-white">
+              back
+            </button>
           </div>
           {/* Form Section */}
           <div className="w-full">
-            <div className="bg-black/40 shadow-sm backdrop-blur-sm p-4 sm:p-6 md:p-8 rounded-xl border-1 border-red-100 ">
-              <h1 className="text-[24px]  font-[300] text-white mb-6 text-center drop-shadow-lg">
+            <div className="bg-black/40 shadow-sm backdrop-blur-sm p-4 sm:p-6 md:p-8 rounded-xl border-1 border-red-100">
+              <h1 className="text-xl md:text-2xl font-light text-white mb-6 text-center drop-shadow-lg">
                 Search Previous Bills
               </h1>
               
@@ -123,7 +124,7 @@ const Gobackbtn = ()=>{
                 <div>
                   <label
                     htmlFor="vehicleNo"
-                    className="block text-[14px] font-[400] text-white mb-2"
+                    className="block text-xs md:text-sm font-normal text-white mb-2"
                   >
                     Vehicle Number
                   </label>
@@ -146,7 +147,7 @@ const Gobackbtn = ()=>{
                 <div>
                   <label
                     htmlFor="mobileNo"
-                    className="block text-[14px] font-[400] text-white mb-2"
+                    className="block text-xs md:text-sm font-normal text-white mb-2"
                   >
                     Mobile Number
                   </label>
@@ -176,14 +177,14 @@ const Gobackbtn = ()=>{
                       mobileNo.length !== 10 ||
                       isLoading
                     }
-                    className="flex-1 bg-gradient-to-r from-red-700 to-red-900 text-white py-3 px-4 rounded-lg hover:from-red-800 hover:to-red-950 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-bold text-sm sm:text-base shadow-lg"
+                    className="flex-1 bg-gradient-to-r from-red-700 to-red-900 text-white py-2 md:py-3 px-4 rounded-lg hover:from-red-800 hover:to-red-950 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-bold text-sm sm:text-base shadow-lg"
                   >
                     {isLoading ? "Searching..." : "Search Bills"}
                   </button>
                   <button
                     type="button"
                     onClick={handleClear}
-                    className="flex-1 bg-gray-600 text-white py-3 px-4 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 transition-all duration-300 font-bold text-sm sm:text-base shadow-lg"
+                    className="flex-1 bg-gray-600 text-white py-2 md:py-3 px-4 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 transition-all duration-300 font-bold text-sm sm:text-base shadow-lg"
                   >
                     Clear
                   </button>
@@ -203,24 +204,24 @@ const Gobackbtn = ()=>{
                 No bills found for the given details
               </div>
             )}
-{/* <dojv  d></dojv> */}
+
             {searchResults.length > 0 && (
               <div className="space-y-4">
-                <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-6 text-center lg:text-left drop-shadow-lg">
+                <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-6 text-center sm:text-left drop-shadow-lg">
                   Previous Bills ({searchResults.length})
                 </h2>
                 <div className="grid gap-4">
                   {searchResults.map((bill) => (
                     <div
                       key={bill.id}
-                      className="bg-black/80 backdrop-blur-sm border-2 border-red-600 rounded-lg p-4 hover:border-white transition-all duration-300 shadow-md"
+                      className="bg-black/80 backdrop-blur-sm border-2 border-red-600 rounded-lg p-3 md:p-4 hover:border-white transition-all duration-300 shadow-md"
                     >
-                      <div className="flex flex-col sm:flex-row justify-between gap-4">
-                        <div className="space-y-2">
-                          <p className="text-white text-sm sm:text-base">
+                      <div className="flex flex-col sm:flex-row justify-between gap-3 md:gap-4">
+                        <div className="space-y-1 md:space-y-2">
+                          <p className="text-white text-xs sm:text-sm md:text-base">
                             Vehicle: {bill.vehicleNumber}
                           </p>
-                          <p className="text-gray-300 text-sm">
+                          <p className="text-gray-300 text-xs sm:text-sm">
                             Date:
                             {new Date(bill.createdAt).toLocaleDateString("en-US", {
                               year: "numeric",
@@ -228,13 +229,13 @@ const Gobackbtn = ()=>{
                               day: "numeric",
                             })}
                           </p>
-                          <p className="text-white font-bold text-sm sm:text-base">
+                          <p className="text-white font-bold text-xs sm:text-sm md:text-base">
                             Amount: ₹{bill.totalAmount}
                           </p>
                         </div>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center justify-between sm:justify-end gap-2 mt-2 sm:mt-0">
                           <span
-                            className={`px-3 py-1 rounded-full text-xs sm:text-sm font-bold ${
+                            className={`px-2 md:px-3 py-1 rounded-full text-xs font-bold ${
                               bill.servicestatus === "Serviced"
                                 ? "bg-green-900/80 text-white border border-green-500"
                                 : "bg-yellow-900/80 text-white border border-yellow-500"
@@ -244,7 +245,7 @@ const Gobackbtn = ()=>{
                           </span>
                           <button
                             onClick={() => handleViewDetails(bill)}
-                            className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold shadow-md text-xs sm:text-sm"
+                            className="px-2 md:px-3 py-1 md:py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold shadow-md text-xs"
                           >
                             View
                           </button>
