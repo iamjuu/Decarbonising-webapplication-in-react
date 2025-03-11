@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import VIDEO_URL from "./../assets/video/videoplayback.mp4";
 import axios from "./../Instance/Instance";
+
 const VehicleSearch = () => {
 
   const [vehicleNo, setVehicleNo] = useState("");
