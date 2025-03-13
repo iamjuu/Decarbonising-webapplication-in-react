@@ -78,7 +78,7 @@ const VehicleSearch = () => {
   };
 
   const handleViewDetails = (invoiceData) => {
-    navigate("/pdf", { state: { invoiceData } });
+    navigate("/nos2/pdf", { state: { invoiceData } });
   };
 
 const Gobackbtn = ()=>{
