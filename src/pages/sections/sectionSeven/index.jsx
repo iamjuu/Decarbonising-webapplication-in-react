@@ -82,7 +82,7 @@ const Index = () => {
             </div>
             <div className="text-center" ref={el => counters.current.push(el)} data-aos="fade-up" data-aos-delay="300">
               <div className="text-4xl font-bold text-red-600 mb-2">
-                <CountUp start={1} end={15} suffix="+" />
+                <CountUp start={1} end={5} suffix="+" />
               </div>
               <div className="text-gray-300">Years Experience</div>
             </div>

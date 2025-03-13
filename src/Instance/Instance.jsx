@@ -1,7 +1,13 @@
 import axios from "axios";
 
+
+
+const API_BASE_URL = import.meta.env.API_URL;
+
+
+
 const Instance = axios.create({
-	baseURL: "http://13.201.189.211/" +"/api/",// Use environment variable
+	baseURL: API_BASE_URL,// Use environment variable
   // baseURL: "https://tkmscraps.com", 
   timeout: 20000,
 });
