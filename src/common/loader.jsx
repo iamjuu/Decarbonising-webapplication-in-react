@@ -21,12 +21,12 @@ const LoadingSpinner = () => {
 
   return (
     <div className="h-screen bg-white">
-      <div className="absolute   inset-0 flex items-center justify-center gap-5">
+      <div className="absolute inset-0 flex items-center justify-center ">
         {/* Wrench animation */}
         <div className="relative">
           <video
             ref={wrenchVideoRef}
-            className="w-24 h-24 object-contain"
+            className="w-20 h-20 object-contain"
             playsInline
             muted
             autoPlay
@@ -37,7 +37,6 @@ const LoadingSpinner = () => {
           </video>
         </div>
 
-        {/* Car repair animation */}
         <div className="relative">
           <video
             ref={carVideoRef}
@@ -49,7 +48,7 @@ const LoadingSpinner = () => {
           >
             <source src={Loader1} type="video/mp4" />
             {/* Fallback animation */}
-            <div className="w-32 h-32 border-8 border-gray-300 border-t-red-600 rounded-full animate-spin" />
+            <div className="w-28 h-28 border-8 border-gray-300 border-t-red-600 rounded-full animate-spin" />
           </video>
         </div>
       </div>

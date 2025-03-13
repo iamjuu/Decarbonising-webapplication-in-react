@@ -20,7 +20,7 @@ const Index = () => {
 
       {/* Desktop Menu */}
       <div className="hidden md:flex space-x-6 text-white">
-      <a href="#home" className="hover:text-red-600  text-[14px] transition-colors">
+      <a href="/" className="hover:text-red-600  text-[14px] transition-colors">
           Home
         </a>
         <a href="#services" className="hover:text-red-600  text-[14px] transition-colors">
@@ -29,7 +29,7 @@ const Index = () => {
         <a href="#about" className="hover:text-red-600 text-[14px] transition-colors">
           About
         </a>
-        <a href="#contact"  className="hover:text-red-600 text-[14px] transition-colors">
+        <a href="#footer"  className="hover:text-red-600 text-[14px] transition-colors">
           Contact
         </a>
       </div>
@@ -86,7 +86,7 @@ const Index = () => {
             About
           </a>
           <a
-            href="#contact"
+            href="#footer"
             className="block hover:text-red-600 transition-colors"
             onClick={() => setIsMenuOpen(false)}
           >

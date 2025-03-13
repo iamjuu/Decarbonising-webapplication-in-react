@@ -103,49 +103,64 @@ const App = () => {
               </p>
               {/* ****************add hover card****************  */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {services.map((service, index) => (
-                  <div
-                    key={index}
-                    className="bg-black/90 p-6 rounded-lg transform hover:scale-105 transition-transform duration-300"
-                    data-aos="zoom-in"
-                  >
-                    <div className="relative hover:translate-y-[-30px]">
-                      <img
-                        src={service.image}
-                        alt={service.title}
-                        className="w-full h-48 opacity-40 hover:opacity-70  object-cover rounded-lg mb-4"
-                        data-aos="flip-right"
-                      />
-                      <service.icon className="absolute top-4 right-4 w-8 h-8 text-red-600" />
-                    </div>
-                    <h3 className="text-[16px] font-[400] " data-aos="fade-up">
-                      {service.title}
-                    </h3>
-                    <p className="text-gray-300 text-[13px] leading-[1.5] mb-4" data-aos="fade-up">
-                      {service.description}
-                    </p>
-                    <div
-                      className="bg-zinc-900/50 p-4 rounded-lg"
-                      data-aos="fade-up"
-                    >
-                      <h1 className="font-[400] text-[16px]   text-red-600">
-                        Technical Specifications:
-                      </h1>
-                      <ul className="">
-                        {service.details.map((detail, idx) => (
-                          <li
-                            key={idx}
-                            className="flex items-start text-[12px] font-[300] leading-[1.5] text-gray-300"
-                            data-aos="fade-down"
-                          >
-                            <span className="text-red-600 mr-2">•</span>
-                            {detail}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                ))}
+              {services.map((service, index) => (
+  <div
+    key={index}
+    className="bg-black/90 p-6 rounded-lg transform hover:scale-105 transition-all duration-500 ease-in-out hover:shadow-lg hover:shadow-red-600/20"
+    data-aos="zoom-in"
+  >
+    <div className="relative overflow-hidden group transition-all duration-500 ease-in-out">
+      <img
+        src={service.image}
+        alt={service.title}
+        className="w-full h-48 opacity-40 group-hover:opacity-70 object-cover rounded-lg mb-4 transition-all duration-500 ease-in-out transform group-hover:scale-110"
+        data-aos="flip-right"
+      />
+      <service.icon className="absolute top-4 right-4 w-8 h-8 text-red-600 transition-all duration-500 ease-in-out group-hover:scale-125 group-hover:text-red-500" />
+      
+      {/* Hover overlay with smooth transition */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out"></div>
+    </div>
+    
+    <div className="transition-all duration-500 ease-in-out transform group-hover:translate-y-[-15px]">
+      <h3 
+        className="text-[16px] font-[400] transition-all duration-300 ease-in-out hover:text-red-500" 
+        data-aos="fade-up"
+      >
+        {service.title}
+      </h3>
+      
+      <p
+        className="text-gray-300 text-[13px] leading-[1.5] mb-4 transition-all duration-300 ease-in-out"
+        data-aos="fade-up"
+      >
+        {service.description}
+      </p>
+      
+      <div
+        className="bg-zinc-900/50 p-4 rounded-lg transition-all duration-300 ease-in-out hover:bg-zinc-800/50"
+        data-aos="fade-up"
+      >
+        <h1 className="font-[400] text-[16px] text-red-600 transition-all duration-300 ease-in-out">
+          Technical Specifications:
+        </h1>
+        
+        <ul className="transition-all duration-300 ease-in-out">
+          {service.details.map((detail, idx) => (
+            <li
+              key={idx}
+              className="flex items-start text-[12px] font-[300] leading-[1.5] text-gray-300 transition-all duration-300 ease-in-out hover:text-white"
+              data-aos="fade-down"
+            >
+              <span className="text-red-600 mr-2 transition-all duration-300 ease-in-out">•</span>
+              {detail}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+))}
               </div>
             </div>
           </section>
@@ -153,11 +168,10 @@ const App = () => {
           {/* Other sections */}
           <SectionNine />
           <SectionTwo data-aos="fade-up" />
-          {/* <SectionEight data-aos="fade-right" /> */}
+
           <SectionSeven data-aos="fade-up" />
           <SectionFour data-aos="fade-down" />
-          {/* <SectionTen/> */}
-          {/* <SectionEight data-aos="fade-down" /> */}
+
           <Footer data-aos="fade-down" />
         </main>
       </div>
