@@ -74,7 +74,7 @@ const BookingPage = () => {
       }
       formData.append("booking", booking.toString());
 
-      const response = await axios.post("/register", formData, {
+      const response = await Axios.post("/register", formData, {
         headers: {
           "Content-Type": "multipart/form-data", // Required for formData
         },
