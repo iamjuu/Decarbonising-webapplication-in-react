@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 import { Calendar, Clock, MapPin, Camera, Car, Phone, User } from "lucide-react";
 import "react-datepicker/dist/react-datepicker.css";
 import videoFile from "./../assets/video/videoplayback.mp4";
-import axios from "axios";
+import Axios from "../Instance/Instance";
 import Swal from "sweetalert2";  // Import SweetAlert2
 
 const BookingPage = () => {
@@ -74,7 +74,7 @@ const BookingPage = () => {
       }
       formData.append("booking", booking.toString());
 
-      const response = await axios.post("http://13.201.189.211/api/register", formData, {
+      const response = await axios.post("/register", formData, {
         headers: {
           "Content-Type": "multipart/form-data", // Required for formData
         },
