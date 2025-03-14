@@ -1,8 +1,8 @@
-import React, { useState, useEffect ,useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import DatePicker from "react-datepicker";
-import { Calendar, Clock, MapPin, Camera, Car, Phone, User } from "lucide-react";
+import { Calendar, Clock, MapPin, Camera, Car, Phone, User, Home } from "lucide-react";
 import "react-datepicker/dist/react-datepicker.css";
 import videoFile from "./../assets/video/videoplayback.mp4";
 import Axios from "../Instance/Instance";
@@ -14,36 +14,35 @@ const BookingPage = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const videoRef = useRef(null);
   const validationSchema = Yup.object({
-    full_name: Yup.string().required("Full Name is required"),
-    phone: Yup.string()
-      .required("Phone number is required")
-      .matches(/^\d+$/, "Phone number must only contain digits"),
-    vehicleModel: Yup.string().required("Vehicle name is required"),
-    place: Yup.string().required("Place is required"),
-    vehiclenumber: Yup.string()
-      .required("Vehicle Number is required")
-      .matches(/^[A-Z0-9]+$/, "Vehicle Number must only contain uppercase letters and numbers"),
-    vehicleyear: Yup.string().required("Vehicle Year is required"),
-    kilometer: Yup.string().required("Vehicle kilometer is required"),
-    pickupImage: Yup.mixed().required("Image is required"),
-    ...(view === "bookLater" && {
-      appointmentDate: Yup.date().required("Appointment date is required")
-    })
-  });
+  full_name: Yup.string().required("Full Name is required"),
+  phone: Yup.string()
+    .required("Phone number is required")
+    .matches(/^\d{10}$/, "Phone number must be exactly 10 digits"),
+  vehicleModel: Yup.string().required("Vehicle name is required"),
+  place: Yup.string().required("Place is required"),
+  vehiclenumber: Yup.string()
+    .required("Vehicle Number is required")
+    .matches(/^[A-Z0-9]+$/, "Vehicle Number must only contain uppercase letters and numbers"),
+  vehicleyear: Yup.string()
+    .required("Vehicle Year is required")
+    .matches(/^\d+$/, "Vehicle Year must be a number"),
+  kilometer: Yup.string().required("Vehicle kilometer is required"),
+  pickupImage: Yup.mixed().required("Image is required"),
+  ...(view === "bookLater" && {
+    appointmentDate: Yup.date().required("Appointment date is required"),
+  }),
+});
 
   useEffect(() => {
-    // Pause video when the view is not null (form is being shown)
+    // Reset form data when switching between views
     if (view) {
-      console.log("useffect worked")
-      if (videoRef.current) {
-        videoRef.current.play();
-      }
-    }else{
-      if (videoRef.current) {
-        videoRef.current.play();
-      }
-
-
+      setPreviewImage(null);
+      setSelectedDate(null);
+    }
+    
+    // Ensure video plays
+    if (videoRef.current) {
+      videoRef.current.play();
     }
   }, [view]);
 
@@ -121,6 +120,7 @@ const BookingPage = () => {
     }
   };
 
+  // Clean up object URL when component unmounts or previewImage changes
   useEffect(() => {
     return () => {
       if (previewImage) {
@@ -129,13 +129,19 @@ const BookingPage = () => {
     };
   }, [previewImage]);
 
+  // Navigate to home
+  const navigateToHome = () => {
+    window.location.href = "/"; // Change this to your home route if needed
+  };
+
   const renderForm = (isBookLater) => (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
+      enableReinitialize={true} // This helps with resetting form state
     >
-      {({ setFieldValue, isSubmitting }) => (
+      {({ setFieldValue, isSubmitting, resetForm }) => (
         <Form className="max-w-4xl mx-auto">
           <div className="bg-black/80 backdrop-blur-sm rounded-lg shadow-2xl p-6 mb-6 text-white">
             <div className="border-b border-red-600 pb-4 mb-6">
@@ -210,7 +216,6 @@ const BookingPage = () => {
                         setFieldValue("vehiclenumber", formattedValue);
                       }}
                     />
-                    <ErrorMessage name="vehiclenumber" component="div" className="text-red-500 text-sm mt-1" />
                   </div>
                   <ErrorMessage name="vehicleModel" component="div" className="text-red-500 text-sm mt-1" />
                   <ErrorMessage name="vehiclenumber" component="div" className="text-red-500 text-sm mt-1" />
@@ -279,7 +284,12 @@ const BookingPage = () => {
             <div className="flex justify-between mt-8">
               <button
                 type="button"
-                onClick={() => setView(null)}
+                onClick={() => {
+                  resetForm();
+                  setPreviewImage(null);
+                  setSelectedDate(null);
+                  setView(null);
+                }}
                 className="px-6 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
               >
                 Back
@@ -304,7 +314,7 @@ const BookingPage = () => {
       <div className="fixed top-0 left-0 w-full h-full -z-10">
         <div className="absolute inset-0 bg-black/20 z-10" /> {/* Overlay */}
         <video
-        ref={videoRef} 
+          ref={videoRef} 
           autoPlay
           loop
           muted
@@ -321,6 +331,17 @@ const BookingPage = () => {
         <div className="max-w-4xl mx-auto">
           {!view ? (
             <div className="text-center space-y-8">
+              {/* Home button */}
+              <div className="flex justify-end">
+                <button 
+                  onClick={navigateToHome}
+                  className="flex items-center gap-2 bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors"
+                >
+                  <Home size={18} />
+                  Home
+                </button>
+              </div>
+
               <div className="space-y-4">
                 <h1 className="text-4xl font-bold text-white">Vehicle Service Booking</h1>
                 <p className="text-gray-300">Choose your preferred booking option below</p>

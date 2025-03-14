@@ -123,7 +123,7 @@ const index = () => {
           <ul className="col-span-2 flex justify-start gap-6 lg:col-span-5 lg:justify-end">
           <li>
               <a
-      href='https://wa.me/9995443243'
+      href='https://wa.me/919995443243'
       rel="noreferrer"
                 target="_blank"
                 className="text-gray-400 transition hover:opacity-75"
