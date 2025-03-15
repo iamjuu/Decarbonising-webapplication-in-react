@@ -146,7 +146,7 @@ const BookingPage = () => {
           <div className="bg-black/80 backdrop-blur-sm rounded-lg shadow-2xl p-6 mb-6 text-white">
             <div className="border-b border-red-600 pb-4 mb-6">
               <h2 className="text-2xl font-bold text-red-500">
-                {isBookLater ? "Schedule Your Pickup" : "Instant Pickup"}
+                {isBookLater ? "Schedule Your Booking" : "Instant Booking"}
               </h2>
               <p className="text-gray-400">Please fill in your details below</p>
             </div>
