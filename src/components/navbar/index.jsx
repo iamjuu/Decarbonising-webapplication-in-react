@@ -70,7 +70,7 @@ const Index = () => {
             </button>
             <button
               onClick={handleBillNow}
-              className="block w-full border-red-700 px-5 py-2 rounded-full transition-colors text-white hover:bg-transparent hover:border hover:border-red-600"
+              className="block w-full border border-red-700 px-5 py-2 rounded-full transition-colors text-white hover:bg-transparent hover:border hover:border-red-600"
             >
               Previous Visit
             </button>
