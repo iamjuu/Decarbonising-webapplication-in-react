@@ -184,7 +184,7 @@ const index = () => {
           
             <li>
   <a
-    href="mailto:nos2kannur.in@gmail.com"
+    href="mailto:contactnos2kannur@gmail.com"
     rel="noreferrer"
     target="_blank"
     className="text-gray-400 transition hover:opacity-75"
