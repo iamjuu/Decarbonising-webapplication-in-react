@@ -299,6 +299,13 @@ const Invoice = () => {
           </tbody>
           {pageNumber === totalPages && (
             <tfoot>
+              <tr className="border-b">
+                <td className="px-4 py-3 font-semibold text-right">Total Amount:</td>
+                <td className="px-4 py-3 text-right text-gray-600">
+  ₹{invoiceData.services.reduce((sum, s) => sum + s.serviceAmount, 0).toFixed(2)}
+</td>
+
+              </tr>
             
               <tr className="border-b">
                 <td className="px-4 py-3 font-semibold text-right">Discount:</td>
@@ -307,12 +314,6 @@ const Invoice = () => {
                 </td>
               </tr>
 
-              <tr className="border-b">
-                <td className="px-4 py-3 font-semibold text-right">Total Amount:</td>
-                <td className="px-4 py-3 text-right text-gray-600">
-                  ₹{invoiceData.totalAmount.toFixed(2)}
-                </td>
-              </tr>
 
 
 
