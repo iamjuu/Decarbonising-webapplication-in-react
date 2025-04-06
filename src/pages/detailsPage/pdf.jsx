@@ -299,22 +299,27 @@ const Invoice = () => {
           </tbody>
           {pageNumber === totalPages && (
             <tfoot>
-              <tr className="border-b">
-                <td className="px-4 py-3 font-semibold text-right">Total Amount:</td>
-                <td className="px-4 py-3 text-right text-gray-600">
-                  ₹{invoiceData.totalAmount.toFixed(2)}
-                </td>
-              </tr>
+            
               <tr className="border-b">
                 <td className="px-4 py-3 font-semibold text-right">Discount:</td>
                 <td className="px-4 py-3 text-right text-red-600">
                   -₹{invoiceData.discount.toFixed(2)}
                 </td>
               </tr>
+
+              <tr className="border-b">
+                <td className="px-4 py-3 font-semibold text-right">Total Amount:</td>
+                <td className="px-4 py-3 text-right text-gray-600">
+                  ₹{invoiceData.totalAmount.toFixed(2)}
+                </td>
+              </tr>
+
+
+
               <tr>
                 <td className="px-4 py-3 font-semibold text-right">Net Amount:</td>
                 <td className="px-4 py-3 font-bold text-right text-gray-800">
-                  ₹{(invoiceData.totalAmount - invoiceData.discount).toFixed(2)}
+                  ₹{invoiceData.totalAmount.toFixed(2)}
                 </td>
               </tr>
             </tfoot>
