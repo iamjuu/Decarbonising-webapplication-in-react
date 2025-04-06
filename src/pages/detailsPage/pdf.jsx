@@ -29,7 +29,7 @@ const Invoice = () => {
   // Modify the services per page calculation
   useEffect(() => {
     if (invoiceData?.services) {
-      const firstPageServices = 5;
+      const firstPageServices = 4;
       const remainingServices = invoiceData.services.length - firstPageServices;
       
       if (remainingServices > 0) {
