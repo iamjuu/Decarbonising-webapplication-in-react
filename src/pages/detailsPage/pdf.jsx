@@ -43,12 +43,14 @@ const Invoice = () => {
   }, [invoiceData]);
 
   // Get current page's services
-  const getCurrentPageServices = () => {
+  const getCurrentPageServices = (pageNumber) => {
     if (!invoiceData?.services) return [];
     
-    if (currentPage === 1) {
+    if (pageNumber === 1) {
+      // First page shows first 5 services
       return invoiceData.services.slice(0, servicesPerPage);
     } else {
+      // Second page shows only remaining services
       return invoiceData.services.slice(servicesPerPage);
     }
   };
@@ -274,7 +276,7 @@ const Invoice = () => {
       {/* Services Table - Show on both pages */}
       <div className={`mb-8 ${pageNumber === 2 ? 'mt-8' : ''}`}>
         <h2 className="mb-3 text-lg font-semibold text-red-600">
-          Services {totalPages > 1 ? `(Page ${pageNumber} of ${totalPages})` : ''}
+          {pageNumber === 1 ? 'Services' : 'Remaining Services'}
         </h2>
         <table className="w-full">
           <thead>
@@ -288,7 +290,7 @@ const Invoice = () => {
             </tr>
           </thead>
           <tbody>
-            {getCurrentPageServices().map((service, index) => (
+            {getCurrentPageServices(pageNumber).map((service, index) => (
               <tr key={index} className="border-b">
                 <td className="px-4 py-3 text-sm text-gray-600">{service.serviceType}</td>
                 <td className="px-4 py-3 text-sm text-right text-gray-600">
